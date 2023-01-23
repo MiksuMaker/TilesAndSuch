@@ -39,7 +39,7 @@ public class TileReader : MonoBehaviour
 
         #region Tile Check
         // STRAIGHT
-        if (tile == straight.Contains(tile))
+        if (straight.Contains(tile))
         {
             // Check Orientation
             if (tile == straight[0]) // Vertical
@@ -53,7 +53,7 @@ public class TileReader : MonoBehaviour
         }
 
         // SIDEWALL
-        if (tile == sideWall.Contains(tile))
+        if (sideWall.Contains(tile))
         {
             // Check Orientation
             if (tile == sideWall[0])
@@ -67,7 +67,7 @@ public class TileReader : MonoBehaviour
         }
 
         // CORNER
-        if (tile == corner.Contains(tile))
+        if (corner.Contains(tile))
         {
             // Check Orientation    (first wall clockwise)
             if (tile == corner[0])
@@ -81,7 +81,7 @@ public class TileReader : MonoBehaviour
         }
 
         // DEAD END
-        if (tile == deadEnd.Contains(tile))
+        if (deadEnd.Contains(tile))
         {
             // Check Orientation
             if (tile == deadEnd[0])
