@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 
 public class CoordinateDrawer : MonoBehaviour
@@ -7,7 +9,8 @@ public class CoordinateDrawer : MonoBehaviour
     #region Properties
 
     [Header("Handle")]
-    [SerializeField] GameObject handle;
+    [SerializeField] public GameObject handle;
+    [SerializeField] public float handleWidth = 1f;
 
 
     [Header("Coordinates")]
@@ -40,7 +43,7 @@ public class CoordinateDrawer : MonoBehaviour
 
 
         // Draw arrows away from the Radius Circle
-        Gizmos.color = Color.green;                 
+        Gizmos.color = Color.green;
         // UP
         Gizmos.DrawRay(new Vector3(0f, circleRadius), Vector3.up * arrowLength);
         Gizmos.DrawRay(new Vector3(0f, circleRadius + arrowLength), Quaternion.AngleAxis(-hakaAngle, Vector3.forward) * Vector3.down * hakaMultiplier);
@@ -67,4 +70,30 @@ public class CoordinateDrawer : MonoBehaviour
     }
 
     #endregion
+
 }
+
+// Editor TOOL
+#region Handle
+
+[CustomEditor(typeof(CoordinateDrawer))]
+public class HandleEditor : Editor
+{
+    public void OnSceneGUI()
+    {
+
+        var t = target as CoordinateDrawer;
+        var tr = t.handle.transform;
+        var pos = tr.position;
+
+        var color = Color.blue;
+        Handles.color = color;
+        Handles.DrawWireDisc(pos, -tr.forward, 1f);
+
+        GUI.color = color;
+        Handles.Label(pos, t.handleWidth.ToString("F1"));
+
+    }
+}
+
+#endregion
