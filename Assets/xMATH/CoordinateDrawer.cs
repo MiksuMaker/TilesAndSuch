@@ -27,14 +27,18 @@ public class CoordinateDrawer : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+        Vector3 pos = transform.position;
+
         // Draw Circle
         Gizmos.color = Color.white;
-        Gizmos.DrawWireSphere(Vector3.zero, circleRadius);
+        //Gizmos.DrawWireSphere(Vector3.zero, circleRadius);
+        Handles.color = Color.white;
+        Handles.DrawWireDisc(transform.position, -Vector3.forward, 1f);
 
         // Draw Arrow Towards Handle
         Gizmos.color = Color.black;
-        Gizmos.DrawLine(Vector3.zero, handle.transform.position);
-        Vector3 dir = (handle.transform.position - transform.position).normalized;
+        Gizmos.DrawLine(pos, handle.transform.position);
+        Vector3 dir = (handle.transform.position - pos).normalized;
         Gizmos.DrawRay(handle.transform.position, Quaternion.AngleAxis(hakaAngle, Vector3.forward) * -dir * hakaMultiplier);
         Gizmos.DrawRay(handle.transform.position, Quaternion.AngleAxis(-hakaAngle, Vector3.forward) * -dir * hakaMultiplier);
 
@@ -45,27 +49,27 @@ public class CoordinateDrawer : MonoBehaviour
         // Draw arrows away from the Radius Circle
         Gizmos.color = Color.green;
         // UP
-        Gizmos.DrawRay(new Vector3(0f, circleRadius), Vector3.up * arrowLength);
-        Gizmos.DrawRay(new Vector3(0f, circleRadius + arrowLength), Quaternion.AngleAxis(-hakaAngle, Vector3.forward) * Vector3.down * hakaMultiplier);
-        Gizmos.DrawRay(new Vector3(0f, circleRadius + arrowLength), Quaternion.AngleAxis(hakaAngle, Vector3.forward) * Vector3.down * hakaMultiplier);
+        Gizmos.DrawRay(pos, Vector3.up * arrowLength);
+        Gizmos.DrawRay(new Vector3(pos.x, pos.y + arrowLength), Quaternion.AngleAxis(-hakaAngle, Vector3.forward) * Vector3.down * hakaMultiplier);
+        Gizmos.DrawRay(new Vector3(pos.x, pos.y + arrowLength), Quaternion.AngleAxis(hakaAngle, Vector3.forward) * Vector3.down * hakaMultiplier);
 
         // DOWN
-        Gizmos.DrawRay(new Vector3(0f, -circleRadius), Vector3.down * arrowLength);
-        Gizmos.DrawRay(new Vector3(0f, -(circleRadius + arrowLength)), Quaternion.AngleAxis(-hakaAngle, Vector3.forward) * Vector3.up * hakaMultiplier);
-        Gizmos.DrawRay(new Vector3(0f, -(circleRadius + arrowLength)), Quaternion.AngleAxis(hakaAngle, Vector3.forward) * Vector3.up * hakaMultiplier);
+        Gizmos.DrawRay(pos, Vector3.down * arrowLength);
+        Gizmos.DrawRay(new Vector3(pos.x, -(pos.y + arrowLength)), Quaternion.AngleAxis(-hakaAngle, Vector3.forward) * Vector3.up * hakaMultiplier);
+        Gizmos.DrawRay(new Vector3(pos.x, -(pos.y + arrowLength)), Quaternion.AngleAxis(hakaAngle, Vector3.forward) * Vector3.up * hakaMultiplier);
 
 
 
         Gizmos.color = Color.red;
         // RIGHT
-        Gizmos.DrawRay(new Vector3(circleRadius, 0f), Vector3.right * arrowLength);
-        Gizmos.DrawRay(new Vector3((circleRadius + arrowLength), 0f), Quaternion.AngleAxis(-hakaAngle, Vector3.forward) * Vector3.left * hakaMultiplier);
-        Gizmos.DrawRay(new Vector3((circleRadius + arrowLength), 0f), Quaternion.AngleAxis(hakaAngle, Vector3.forward) * Vector3.left * hakaMultiplier);
+        Gizmos.DrawRay(pos, Vector3.right * arrowLength);
+        Gizmos.DrawRay(new Vector3(pos.x + arrowLength, pos.y), Quaternion.AngleAxis(-hakaAngle, Vector3.forward) * Vector3.left * hakaMultiplier);
+        Gizmos.DrawRay(new Vector3(pos.x + arrowLength, pos.y), Quaternion.AngleAxis(hakaAngle, Vector3.forward) * Vector3.left * hakaMultiplier);
 
         // LEFT
-        Gizmos.DrawRay(new Vector3(-circleRadius, 0f), Vector3.left * arrowLength);
-        Gizmos.DrawRay(new Vector3(-(circleRadius + arrowLength), 0f), Quaternion.AngleAxis(-hakaAngle, Vector3.forward) * Vector3.right * hakaMultiplier);
-        Gizmos.DrawRay(new Vector3(-(circleRadius + arrowLength), 0f), Quaternion.AngleAxis(hakaAngle, Vector3.forward) * Vector3.right * hakaMultiplier);
+        Gizmos.DrawRay(pos, Vector3.left * arrowLength);
+        Gizmos.DrawRay(new Vector3(-(pos.x + arrowLength), 0f), Quaternion.AngleAxis(-hakaAngle, Vector3.forward) * Vector3.right * hakaMultiplier);
+        Gizmos.DrawRay(new Vector3(-(pos.x + arrowLength), 0f), Quaternion.AngleAxis(hakaAngle, Vector3.forward) * Vector3.right * hakaMultiplier);
 
     }
 
