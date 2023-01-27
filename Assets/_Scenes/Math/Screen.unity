@@ -150,7 +150,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &328207331
 Transform:
   m_ObjectHideFlags: 0
@@ -179,8 +179,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   screen: {fileID: 113769285}
-  percentageWidth: 0.73
-  percentageHeight: 0.46
+  percentageWidth: 0.784
+  percentageHeight: 0.746
 --- !u!1 &581292992
 GameObject:
   m_ObjectHideFlags: 0
@@ -552,6 +552,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1799554616801175233, guid: 098f9893f896e01439d610a03fb2f5ef, type: 3}
+      propertyPath: percentageWidth
+      value: 0.746
+      objectReference: {fileID: 0}
     - target: {fileID: 6822884555132798762, guid: 098f9893f896e01439d610a03fb2f5ef, type: 3}
       propertyPath: m_RootOrder
       value: 8

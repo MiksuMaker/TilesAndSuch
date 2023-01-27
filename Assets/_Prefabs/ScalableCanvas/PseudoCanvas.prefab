@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6822884555132798762}
   - component: {fileID: 6822884555132798763}
+  - component: {fileID: 1799554616801175233}
   m_Layer: 0
   m_Name: PseudoCanvas
   m_TagString: Untagged
@@ -45,5 +46,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   centered: 0
+  pivot: {x: 0, y: 600, z: 0}
   width: 800
   height: 600
+--- !u!114 &1799554616801175233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6822884555132798765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa4468e6b0566e84ea54491d1e29d296, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  screen: {fileID: 6822884555132798763}
+  percentageWidth: 0.619
+  percentageHeight: 0.421

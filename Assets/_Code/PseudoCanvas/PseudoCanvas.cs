@@ -11,7 +11,9 @@ public class PseudoCanvas : MonoBehaviour
     private Vector3 pivot = Vector3.zero;
 
     [Header("Canvas Size")]
+    [Range(0, 1)]
     public float percentageWidth  = 0.75f;
+    [Range(0, 1)]
     public float percentageHeight = 0.75f;
 
 
