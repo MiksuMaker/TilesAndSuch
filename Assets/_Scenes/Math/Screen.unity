@@ -552,10 +552,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1799554616801175233, guid: 098f9893f896e01439d610a03fb2f5ef, type: 3}
-      propertyPath: percentageWidth
-      value: 0.746
-      objectReference: {fileID: 0}
     - target: {fileID: 6822884555132798762, guid: 098f9893f896e01439d610a03fb2f5ef, type: 3}
       propertyPath: m_RootOrder
       value: 8

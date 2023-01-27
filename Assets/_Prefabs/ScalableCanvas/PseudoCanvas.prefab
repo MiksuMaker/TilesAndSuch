@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6822884555132798762}
   - component: {fileID: 6822884555132798763}
   - component: {fileID: 1799554616801175233}
+  - component: {fileID: 113769286}
   m_Layer: 0
   m_Name: PseudoCanvas
   m_TagString: Untagged
@@ -62,5 +63,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   screen: {fileID: 6822884555132798763}
-  percentageWidth: 0.619
+  percentageWidth: 0.709
   percentageHeight: 0.421
+--- !u!114 &113769286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6822884555132798765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98ad74e39443e7548813e692a20907bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  screen: {fileID: 6822884555132798763}
+  percentageWidth: 0.321
+  percentageHeight: 0.134
+  widthOffset: 0.2
+  heightOffset: 0.154
+  fill: 0.709
+  innerBarWidth: 0.926
+  innerBarHeight: 0.805
+  innerWidthOffset: 0.06
+  innerHeightOffset: 0.082
