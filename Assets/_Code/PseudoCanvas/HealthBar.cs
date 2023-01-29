@@ -82,15 +82,6 @@ public class HealthBar : MonoBehaviour
         float fillBarHeight = barHeight * innerBarHeight;
         float fillBarWidth = barWidth * innerBarWidth;
 
-
-        //float fillxOffset = barWidth * widthOffset;
-
-        //float fillyOffset = fillBarHeight * innerHeightOffset;
-
-        //float fillxOffset = fillBarWidth * (innerWidthOffset * (1 - ) );
-
-
-
         float fillyOffset = fillBarHeight * ((1 - innerBarHeight) / 2);
         float fillxOffset = fillBarWidth * ((1 - innerBarWidth) / 2);
 
@@ -100,8 +91,6 @@ public class HealthBar : MonoBehaviour
         float fillXpos = cPivot.x + fillxOffset;
 
         Vector3 fillPivot = new Vector3(fillXpos, fillYpos);
-
-
 
         // Draw Canvas Border
 
