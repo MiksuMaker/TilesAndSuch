@@ -25,11 +25,6 @@ public class ProgressBar : MonoBehaviour
     float timeToCompletition = 1f;
 
 
-    [Header("Controls")]
-    [SerializeField]
-    bool instantSet = true;
-
-
     #endregion
 
     #region EASING FUNCTIONS
@@ -39,8 +34,7 @@ public class ProgressBar : MonoBehaviour
 
     public enum EasingType
     {
-        easing_1, easeOutBounce, easeInOutQuint, easeInOutQuad, easeOutQuart,
-        easeInExpo
+        easing_1, easeOutBounce, easeInOutQuint, easeInOutQuad, easeOutQuart
     }
 
     public EasingType easerType = EasingType.easeOutBounce;
@@ -81,12 +75,6 @@ public class ProgressBar : MonoBehaviour
 
                 break;
             // ====================
-            case EasingType.easeInExpo:
-
-                easer += EaseInExpo;
-
-                break;
-            // ====================
             default:
                 Debug.LogWarning("Unknown Easing type detected.");
                 break;
@@ -95,7 +83,7 @@ public class ProgressBar : MonoBehaviour
     #endregion
 
 
-    #region Easing Functions
+    #region Easings
     private float DoEasing_1(float number)
     {
         return 1 - Mathf.Cos((number * Mathf.PI) / 2);
@@ -138,12 +126,6 @@ public class ProgressBar : MonoBehaviour
     {
         return 1 - (1 - x) * (1 - x) * (1 - x) * (1 - x);
     }
-
-    private float EaseInExpo(float x)
-    {
-        //return x === 0 ? 0 : Math.pow(2, 10 * x - 10);
-        return (x == 0) ? 0 : Mathf.Pow(2, 10 * x - 10);
-    }
     #endregion
     #endregion
 
@@ -154,15 +136,15 @@ public class ProgressBar : MonoBehaviour
         currentHealth = fullHealth;
         previousHealth = currentHealth;
 
-        StartCoroutine(LoadProgress(currentHealth, currentHealth));
+        StartCoroutine(LoadProgress(currentHealth, previousHealth));
     }
 
     private void StartProgressChange(float current, float previous)
     {
-        StartCoroutine(LoadProgress(previous, current));
+        StartCoroutine(LoadProgress(currentHealth, previousHealth));
     }
 
-    IEnumerator LoadProgress(float startValue, float goalValue)
+    IEnumerator LoadProgress(float goalValue, float startValue)
     {
         float timeBetweenIncrements = 0.01f;
         WaitForSeconds wait = new WaitForSeconds(timeBetweenIncrements);
@@ -173,12 +155,10 @@ public class ProgressBar : MonoBehaviour
 
 
 
-        // Set the Easer Delegate according to EaserType selected
+
         SetEase(easerType);
 
         easingInProgress = true;
-
-        float ratio = (startValue / goalValue);
 
         float progress = 0f;
         while (progress < 1f)
@@ -186,11 +166,11 @@ public class ProgressBar : MonoBehaviour
             yield return wait;
 
             // Increment the Progress Bar
+            //SetFill(DoEasing_1(progress));
+            //SetFill(EaseOutBounce(progress));
             SetFill(easer(progress));
 
-            //CalculateFill(startValue, goalValue * easer(progress));   // Attempt at a set value
-            //CalculateFill(startValue / fullHealth, (goalValue * easer(progress) / fullHealth));
-            //CalculatePartialFill(startValue, goalValue, ratio);
+            //CalculateFill()
 
             progress += increment;
 
@@ -202,19 +182,9 @@ public class ProgressBar : MonoBehaviour
     #endregion
 
 
-
+    
 
     #region Progress Bar
-    private void CalculatePartialFill(float original, float current, float ratio)
-    {
-        if (current > original) { current = original; }
-
-
-        // Set Progressbar fill according to Current Health/Progress
-        float fill = (current / original) * ratio;
-
-        SetFill(fill);
-    }
 
     private void CalculateFill(float original, float current)
     {
@@ -241,31 +211,9 @@ public class ProgressBar : MonoBehaviour
     {
         if (!easingInProgress)
         {
-            if (instantSet)
-            {
-                // Set changes straight 
-                CalculateFill(fullHealth, currentHealth);
-                return;
-            }
+            CalculateFill(fullHealth, currentHealth);
 
-
-            // Check if current value is different to previous one
-            if (previousHealth != currentHealth)
-            {
-                // Check if it is MORE or LESS
-                if (currentHealth > previousHealth)
-                {
-                    // MORE
-                    StartProgressChange(currentHealth, previousHealth);
-                }
-                else
-                {
-                    // LESS
-                }
-            }
         }
-
-
     }
     #endregion
 
