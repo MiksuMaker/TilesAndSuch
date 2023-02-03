@@ -1200,6 +1200,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: ProgressBar
       objectReference: {fileID: 0}
+    - target: {fileID: 3907043438735845307, guid: 50f8288af3b3c7d4594d57c6f6d43abf, type: 3}
+      propertyPath: fullHealth
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3907043438735845307, guid: 50f8288af3b3c7d4594d57c6f6d43abf, type: 3}
+      propertyPath: currentHealth
+      value: 50
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 50f8288af3b3c7d4594d57c6f6d43abf, type: 3}
 --- !u!1001 &6822884555112283246

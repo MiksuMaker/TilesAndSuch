@@ -16,7 +16,7 @@ public class ProgressBar : MonoBehaviour
     [SerializeField]
     [Range(0, 100)]
     int currentHealth;
-    int previousHealth;
+    int previousHealth; // Not implemented
 
     bool easingInProgress = false;
 
@@ -82,7 +82,6 @@ public class ProgressBar : MonoBehaviour
     }
     #endregion
 
-
     #region Easings
     private float DoEasing_1(float number)
     {
@@ -134,17 +133,17 @@ public class ProgressBar : MonoBehaviour
     private void Start()
     {
         currentHealth = fullHealth;
-        previousHealth = currentHealth;
+        //previousHealth = currentHealth;
 
-        StartCoroutine(LoadProgress(currentHealth, previousHealth));
+        StartCoroutine(LoadProgress());
     }
 
     private void StartProgressChange(float current, float previous)
     {
-        StartCoroutine(LoadProgress(currentHealth, previousHealth));
+        StartCoroutine(LoadProgress());
     }
 
-    IEnumerator LoadProgress(float goalValue, float startValue)
+    IEnumerator LoadProgress()
     {
         float timeBetweenIncrements = 0.01f;
         WaitForSeconds wait = new WaitForSeconds(timeBetweenIncrements);
@@ -154,7 +153,7 @@ public class ProgressBar : MonoBehaviour
 
 
 
-
+        //float finalFillPercent = (currentHealth / 100); // Not implemented yet
 
         SetEase(easerType);
 
@@ -166,9 +165,7 @@ public class ProgressBar : MonoBehaviour
             yield return wait;
 
             // Increment the Progress Bar
-            //SetFill(DoEasing_1(progress));
-            //SetFill(EaseOutBounce(progress));
-            SetFill(easer(progress));
+            SetFill(easer(progress) /** finalFillPercent*/);
 
             //CalculateFill()
 
@@ -176,6 +173,7 @@ public class ProgressBar : MonoBehaviour
 
         }
 
+        //currentHealth = fullHealth;
         easingInProgress = false;
     }
 
