@@ -428,7 +428,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3907043438735845307, guid: 50f8288af3b3c7d4594d57c6f6d43abf, type: 3}
       propertyPath: easerType
-      value: 4
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3907043438735845307, guid: 50f8288af3b3c7d4594d57c6f6d43abf, type: 3}
+      propertyPath: fullHealth
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 3907043438735845307, guid: 50f8288af3b3c7d4594d57c6f6d43abf, type: 3}
       propertyPath: timeToCompletition
@@ -1199,6 +1203,10 @@ PrefabInstance:
     - target: {fileID: 3907043438735845305, guid: 50f8288af3b3c7d4594d57c6f6d43abf, type: 3}
       propertyPath: m_Name
       value: ProgressBar
+      objectReference: {fileID: 0}
+    - target: {fileID: 3907043438735845307, guid: 50f8288af3b3c7d4594d57c6f6d43abf, type: 3}
+      propertyPath: fullHealth
+      value: 52
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 50f8288af3b3c7d4594d57c6f6d43abf, type: 3}
