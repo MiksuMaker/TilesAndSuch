@@ -38,8 +38,12 @@ public class VectorComparer : MonoBehaviour
 
         if (dotValue <= 0) { dir = -dir; }
 
-        Gizmos.DrawRay(toPos, Quaternion.AngleAxis(45f, Vector3.forward) * dir * 1f);
-        Gizmos.DrawRay(toPos, Quaternion.AngleAxis(-45f, Vector3.forward) * dir * 1f);
+        float nigh0 = 0.05f;
+        if (dotValue < nigh0 && dotValue > -nigh0) { Gizmos.DrawWireSphere(from, 0.2f); dir = Vector3.zero; }
+
+        Gizmos.DrawRay(toPos, Quaternion.AngleAxis(45f, Vector3.forward) * dir * 0.5f);
+        Gizmos.DrawRay(toPos, Quaternion.AngleAxis(-45f, Vector3.forward) * dir * 0.5f);
+
     }
     #endregion
 
