@@ -47,31 +47,13 @@ public class CrossProductPlacer : MonoBehaviour
     [ContextMenu("Place a Turret")]
     public void PlaceTurret()
     {
+        #region Null Checks
         if (hit.collider == null) { Debug.LogWarning("No hit detected. Can't place a turret."); return; }
-
         if (turretPrefab == null) { Debug.LogWarning("No turret prefab assigned. Can't place a turret."); return; }
-
+        #endregion
 
         // Place the Object
         CalculateAndPlace();
-    }
-
-    public void CalculatePlacement()
-    {
-        // Raycast
-        Physics.Raycast(transform.position, transform.forward, out hit, maxHitDistance);
-
-        // Get normal
-        Vector3 normal = hit.normal;
-        DrawRay(hit.point, normal.normalized * vectorLength, Color.green);
-
-        // Calculate Transform.Right
-        Vector3 right = Vector3.Cross(normal, transform.forward);
-        DrawRay(hit.point, right.normalized * vectorLength, Color.red);
-
-        // Calculate Transform.Forward
-        Vector3 forward = Vector3.Cross(right, normal);
-        DrawRay(hit.point, forward.normalized * vectorLength, Color.blue);
     }
 
     public void CalculateAndPlace()
@@ -94,13 +76,37 @@ public class CrossProductPlacer : MonoBehaviour
         // Instantiate Object
         GameObject turret = Instantiate(turretPrefab,
                                         hit.point,
-                                        Quaternion.LookRotation(forward)) as GameObject;
+                                        Quaternion.identity) as GameObject;
 
+        // Rotate the Turret accordingly
 
-        //turret.transform.rotation.SetLookRotation(forward.normalized, normal.normalized);
-        turret.transform.right = right;
-        turret.transform.up = normal;
+        // V1   (These don't work, as each one "resets" the others, so they can't be "stacked")
 
+        //turret.transform.right = right;   
+        //turret.transform.up = normal;
+        //turret.transform.forward = forward;
+
+        // V2   ( This works, as it set both UP and FORWARD accordingly)
+        Quaternion rot = Quaternion.LookRotation(forward.normalized, normal.normalized);
+        turret.transform.rotation = rot;
+    }
+
+    public void CalculatePlacement()
+    {
+        // Raycast
+        Physics.Raycast(transform.position, transform.forward, out hit, maxHitDistance);
+
+        // Get normal
+        Vector3 normal = hit.normal;
+        DrawRay(hit.point, normal.normalized * vectorLength, Color.green);
+
+        // Calculate Transform.Right
+        Vector3 right = Vector3.Cross(normal, transform.forward);
+        DrawRay(hit.point, right.normalized * vectorLength, Color.red);
+
+        // Calculate Transform.Forward
+        Vector3 forward = Vector3.Cross(right, normal);
+        DrawRay(hit.point, forward.normalized * vectorLength, Color.blue);
     }
 
     #endregion
