@@ -346,7 +346,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   v1: {fileID: 1053983358}
   v2: {fileID: 1053983357}
-  dotValue: -0.49026126
+  dotValue: 0.9858309
 --- !u!4 &1053983356
 Transform:
   m_ObjectHideFlags: 0
@@ -374,12 +374,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3b537903d907b940a6ede7ed7deb75f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dir: {x: -0.28, y: 1, z: 0}
+  dir: {x: -0.34, y: 0.83, z: 0}
   dist: 1
   A: {fileID: 0}
   B: {fileID: 0}
   from: {x: 0, y: 0, z: 0}
-  to: {x: -0.28, y: 1, z: 0}
+  to: {x: -0.34, y: 0.83, z: 0}
 --- !u!114 &1053983358
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -392,12 +392,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3b537903d907b940a6ede7ed7deb75f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dir: {x: -1, y: -1, z: 0}
+  dir: {x: -0.3, y: 1.34, z: 0}
   dist: 1
   A: {fileID: 0}
   B: {fileID: 0}
   from: {x: 0, y: 0, z: 0}
-  to: {x: -1, y: -1, z: 0}
+  to: {x: -0.3, y: 1.34, z: 0}
 --- !u!1 &1203670131
 GameObject:
   m_ObjectHideFlags: 0
