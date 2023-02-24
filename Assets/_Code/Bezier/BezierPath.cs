@@ -59,7 +59,7 @@ public class BezierPath : MonoBehaviour
         Vector3 bezier_point = (1 - t) * r_point + t * s_point;
 
         Gizmos.color = Color.red;
-        Gizmos.DrawSphere(bezier_point, rad);
+        Gizmos.DrawSphere(bezier_point, rad * 2);
     }
     #endregion
 
