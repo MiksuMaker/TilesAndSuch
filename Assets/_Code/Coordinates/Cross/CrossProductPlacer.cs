@@ -78,6 +78,9 @@ public class CrossProductPlacer : MonoBehaviour
                                         hit.point,
                                         Quaternion.identity) as GameObject;
 
+        // Parent the turret to the Planet /other object
+        turret.transform.parent = hit.collider.transform;
+
         // Rotate the Turret accordingly
 
         // V1   (These don't work, as each one "resets" the others, so they can't be "stacked")
