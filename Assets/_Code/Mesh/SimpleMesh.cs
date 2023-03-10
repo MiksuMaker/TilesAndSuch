@@ -49,6 +49,8 @@ public class SimpleMesh : MonoBehaviour
     #region Functions
     private void DrawCircle(int amount, float radius)
     {
+        if (amount < 3) { amount = 3; }
+
         Mesh mesh = new Mesh();
         
         Vector3[] verts = new Vector3[amount + 1];
