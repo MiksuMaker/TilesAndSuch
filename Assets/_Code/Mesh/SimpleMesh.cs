@@ -101,8 +101,11 @@ public class SimpleMesh : MonoBehaviour
         // Vertices
         List<Vector3> verts = new List<Vector3>();
 
-        // UV's
+        // UVs
         List<Vector2> uvs = new List<Vector2>();
+
+        // Normals
+        List<Vector3> normals = new List<Vector3>();
 
         for (int i = 0; i < amount; i++)
         {
@@ -115,8 +118,25 @@ public class SimpleMesh : MonoBehaviour
             verts.Add(v * innerRadius);     // Inner point
             verts.Add(v * radius);          // Outer point
 
-            uvs.Add(new Vector2(i/(float)amount, 0)); // Inner UV
-            uvs.Add(new Vector2(i / (float)amount, 1)); // Outer UV
+            #region NEW UVs
+            // Midpoint? (as a vector) + v ???
+            //uvs.Add(v * innerRadius);   // Inner
+            //uvs.Add(v * radius);        // Outer
+
+            Vector2 mid = new Vector2(0.5f, 0.5f);
+            Vector2 s = v * 0.5f;
+            uvs.Add(mid + s * (innerRadius / radius));  // Inner UV
+            uvs.Add(mid + s);                           // Outer UV
+            #endregion
+
+            #region OLD UVs
+            //uvs.Add(new Vector2(i/(float)amount, 0)); // Inner UV
+            //uvs.Add(new Vector2(i / (float)amount, 1)); // Outer UV
+            #endregion
+
+            // Normals
+            normals.Add(Vector3.forward);
+            normals.Add(Vector3.forward);
         }
 
         List<int> tri_indices = new List<int>();
@@ -150,7 +170,8 @@ public class SimpleMesh : MonoBehaviour
         // Create the Mesh
         mesh.vertices = verts.ToArray();
         mesh.SetTriangles(tri_indices, 0);
-        mesh.RecalculateNormals();
+        //mesh.RecalculateNormals();
+        mesh.SetNormals(normals);
         mesh.SetUVs(0, uvs);
 
         GetComponent<MeshFilter>().sharedMesh = mesh;
