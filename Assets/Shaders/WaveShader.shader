@@ -38,14 +38,12 @@ Shader "Unlit/WaveShader"
             float _WaveAmplitude;
             float PI = 3.14149265359;
 
-            float changer = 0;
-
             v2f vert (appdata v)
             {
                 v2f o;
 
                 // Add some Wavee to Z-coordinate
-                float wave = _WaveAmplitude * sin(v.vertex.y + PI * v.vertex.x + _Time.y + changer);    // Add this
+                float wave = _WaveAmplitude * sin(v.vertex.x + _Time.y);    // Add this
                 v.vertex.z += wave; // Add this
 
                 o.vertex = UnityObjectToClipPos(v.vertex);
