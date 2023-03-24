@@ -278,7 +278,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   control0: {fileID: 817108601}
   control1: {fileID: 1566027339}
-  anchor: {x: 2.25, y: 2.3702807, z: -2.2235713}
+  anchor: {x: 20.65, y: -2.9868155, z: -7.934125}
 --- !u!4 &340800949
 Transform:
   m_ObjectHideFlags: 0
@@ -287,7 +287,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 340800947}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.25, y: 3.25, z: 0}
+  m_LocalPosition: {x: 20.65, y: 3.25, z: -7.83}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -345,13 +345,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d02e530f54ad904f964b5abed1ad177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  road2D: {fileID: 11400000, guid: 674ec6586722cda499915a4427c4f732, type: 2}
   points:
   - {fileID: 1650330243}
   - {fileID: 1163060363}
   - {fileID: 511896120}
   - {fileID: 340800948}
   - {fileID: 1085757886}
-  travel: 0.26
+  travel: 0.594
 --- !u!1 &511896119
 GameObject:
   m_ObjectHideFlags: 0
@@ -383,7 +384,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   control0: {fileID: 244656716}
   control1: {fileID: 1850801206}
-  anchor: {x: 5, y: 1.2763051, z: -1.1973076}
+  anchor: {x: 7.01, y: 8.10974, z: 8.571734}
 --- !u!4 &511896121
 Transform:
   m_ObjectHideFlags: 0
@@ -392,7 +393,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 511896119}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5, y: 1.75, z: 0}
+  m_LocalPosition: {x: 7.01, y: 0.05, z: 11.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -436,6 +437,7 @@ MonoBehaviour:
   D: {fileID: 1342217987}
   t: 0.24
   indicatorRadius: 0.1
+  turnGizmosOn: 0
 --- !u!4 &577735165
 Transform:
   m_ObjectHideFlags: 0
@@ -612,7 +614,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   control0: {fileID: 1307391401}
   control1: {fileID: 1369937190}
-  anchor: {x: -1.25, y: 1.0939758, z: -1.0262637}
+  anchor: {x: -1.76, y: -5.3391256, z: -23.552305}
 --- !u!4 &1085757887
 Transform:
   m_ObjectHideFlags: 0
@@ -621,7 +623,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1085757885}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.25, y: 1.5, z: 0}
+  m_LocalPosition: {x: -1.76, y: 12.22, z: -20.83}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -692,7 +694,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   control0: {fileID: 1655852518}
   control1: {fileID: 199928314}
-  anchor: {x: 3.75, y: -0.1823293, z: 0.17104395}
+  anchor: {x: -4.24, y: -5.739726, z: 5.3844633}
 --- !u!4 &1163060364
 Transform:
   m_ObjectHideFlags: 0
@@ -701,7 +703,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1163060362}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.75, y: -0.25, z: 0}
+  m_LocalPosition: {x: -4.24, y: -7.87, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1025,6 +1027,7 @@ MonoBehaviour:
   D: {fileID: 1728005134}
   t: 0.56
   indicatorRadius: 0.1
+  turnGizmosOn: 0
 --- !u!4 &1381891407
 Transform:
   m_ObjectHideFlags: 0
@@ -1168,7 +1171,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   control0: {fileID: 317960285}
   control1: {fileID: 1275624774}
-  anchor: {x: 0.82, y: -1.1085621, z: 1.0399472}
+  anchor: {x: -1.99, y: 0.051052205, z: -0.047892306}
 --- !u!4 &1650330244
 Transform:
   m_ObjectHideFlags: 0
@@ -1177,7 +1180,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1650330242}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.82, y: -1.52, z: 0}
+  m_LocalPosition: {x: -1.99, y: 0.07, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

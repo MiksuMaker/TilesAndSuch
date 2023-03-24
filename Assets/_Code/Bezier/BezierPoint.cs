@@ -11,6 +11,8 @@ public class BezierPoint : MonoBehaviour
 
     [HideInInspector]
     public Vector3 anchor;
+
+
     #endregion
 
     #region Setup
