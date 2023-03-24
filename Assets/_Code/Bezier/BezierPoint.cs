@@ -9,7 +9,8 @@ public class BezierPoint : MonoBehaviour
     public Transform control0;
     public Transform control1;
 
-    private Vector3 anchor;
+    [HideInInspector]
+    public Vector3 anchor;
     #endregion
 
     #region Setup

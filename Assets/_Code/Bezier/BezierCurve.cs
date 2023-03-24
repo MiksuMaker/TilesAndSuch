@@ -14,12 +14,16 @@ public class BezierCurve : MonoBehaviour
     [SerializeField] float t = 0f;
     [Space(20)]
     [SerializeField] float indicatorRadius = 0.1f;
+
+    public bool turnGizmosOn = false;
     #endregion
 
     #region Gizmos
     private void OnDrawGizmos()
     {
         if (A == null || B == null || C == null || D == null) { return; }
+
+        if (!turnGizmosOn) { return; }
 
         #region Setup
         Vector3 a = A.transform.position;

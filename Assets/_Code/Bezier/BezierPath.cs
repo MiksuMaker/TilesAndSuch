@@ -7,7 +7,15 @@ public class BezierPath : MonoBehaviour
 {
     #region Properties
     [SerializeField]
+    Mesh2D road2D;
+
+    [Space(20)]
+
+    [SerializeField]
     List<BezierPoint> points = new List<BezierPoint>();
+
+    [Range(0, 1)]
+    [SerializeField] float travel = 0;
     #endregion
 
 
@@ -71,8 +79,64 @@ public class BezierPath : MonoBehaviour
                                Color.white, default, 2f
                                );
 
-            // Check if last of the line
+            // POSITION
+            Vector3 tPos = GetBezierPosition(travel, points[i % points.Count], points[(i + 1) % points.Count]);
+
+            Gizmos.color = Color.red;
+            Gizmos.DrawSphere(tPos, 0.3f);
+
+            // ROTATIOOOON
+            Vector3 tDir = GetBezierDirection(travel, points[i % points.Count], points[(i + 1) % points.Count]);
+            Quaternion rot = Quaternion.LookRotation(tDir);
+
+            Gizmos.color = new Color(100, 100, 100);
+            Gizmos.DrawSphere(tPos + (rot * Vector3.right), 0.2f);
+
+            //Handles.PositionHandle(tPos, rot);
+
+            // ROAD
+            for (int y = 0; y < road2D.vertices.Length; y++)
+            {
+                Vector3 roadpoint = road2D.vertices[y].point;
+
+                Gizmos.color = Color.yellow;
+                Gizmos.DrawSphere(tPos + rot * roadpoint, 0.25f);
+            }
+
         }
+
+
+
+
+
+    }
+
+    Vector3 GetBezierPosition(float t, BezierPoint pt1, BezierPoint pt2)
+    {
+        // Lerp
+        Vector3 PtX = (1 - t) * pt1.anchor + t * pt1.control1.position;
+        Vector3 PtY = (1 - t) * pt1.control1.position + t * pt2.control0.position;
+        Vector3 PtZ = (1 - t) * pt2.control0.position + t * pt2.anchor;
+
+        // Lerp 2
+        Vector3 PtXY = (1 - t) * PtX + t * PtY;
+        Vector3 PtYZ = (1 - t) * PtY + t * PtZ;
+
+        return (1 - t) * PtXY + t * PtYZ;
+    }
+
+    Vector3 GetBezierDirection(float t, BezierPoint pt1, BezierPoint pt2)
+    {
+        // Lerp
+        Vector3 PtX = (1 - t) * pt1.anchor + t * pt1.control1.position;
+        Vector3 PtY = (1 - t) * pt1.control1.position + t * pt2.control0.position;
+        Vector3 PtZ = (1 - t) * pt2.control0.position + t * pt2.anchor;
+
+        // Lerp 2
+        Vector3 PtXY = (1 - t) * PtX + t * PtY;
+        Vector3 PtYZ = (1 - t) * PtY + t * PtZ;
+
+        return (PtXY - PtYZ).normalized;
     }
     #endregion
 }
