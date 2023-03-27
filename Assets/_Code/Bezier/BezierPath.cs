@@ -100,14 +100,15 @@ public class BezierPath : MonoBehaviour
                 Vector3 roadpoint = road2D.vertices[y].point;
 
                 Gizmos.color = Color.yellow;
-                Gizmos.DrawSphere(tPos + rot * roadpoint, 0.25f);
+                //Gizmos.DrawSphere(tPos + rot * roadpoint, 0.25f);
+
+                Vector3 firstPoint = road2D.vertices[y].point + (Vector2)tPos;
+                Vector3 secondPoint = road2D.vertices[(y + 1) % road2D.vertices.Length].point + (Vector2)tPos;
+
+                Helpers.DrawLine(firstPoint, secondPoint);
             }
 
         }
-
-
-
-
 
     }
 
@@ -143,25 +144,31 @@ public class BezierPath : MonoBehaviour
 
 static class Helpers
 {
-    static void DrawRay(Vector3 pos, Vector3 dir, Color c)
+    public static void DrawRay(Vector3 pos, Vector3 dir, Color c)
     {
         Gizmos.color = c;
         Gizmos.DrawRay(pos, dir);
     }
 
-    static void DrawLine(Vector3 pos, Vector3 pos2, Color c)
+    public static void DrawLine(Vector3 pos, Vector3 pos2, Color c)
     {
         Gizmos.color = c;
         Gizmos.DrawLine(pos, pos2);
     }
 
-    static void DrawLine(Vector3 pos, Vector3 pos2)
+    public static void DrawLine(Vector3 pos, Vector3 pos2)
     {
         Gizmos.DrawLine(pos, pos2);
     }
 
-    static void DebugDrawRay(Vector3 pos, Vector3 dir, Color c)
+    public static void DebugDrawRay(Vector3 pos, Vector3 dir, Color c)
     {
         Debug.DrawRay(pos, dir, c, 3f);
+    }
+
+
+    static void DrawShape()
+    {
+
     }
 }
