@@ -121,31 +121,7 @@ public class BezierPath : MonoBehaviour
                 previousRoadPos.Add(tPos);
                 previousRoadRots.Add(rot);
 
-
-
-                //Vector3 randPos = tPos + (rot * Vector3.up * Random.Range(1, 5));
-                //Gizmos.DrawSphere(randPos, 1f);
-
-                //Handles.PositionHandle(tPos, rot);
-
                 // ROAD CROSS SECTION
-                #region Old
-                //for (int y = 0; y < road2D.vertices.Length; y++)
-                //{
-                //    Vector3 roadpoint = road2D.vertices[y].point;
-
-                //    Gizmos.color = Color.yellow;
-                //    //Gizmos.DrawSphere(tPos + rot * roadpoint, 0.25f);
-
-                //    //Vector3 firstPoint = road2D.vertices[y].point + (Vector2)tPos;
-                //    //Vector3 secondPoint = road2D.vertices[(y + 1) % road2D.vertices.Length].point + (Vector2)tPos;
-                //    Vector3 firstPoint = road2D.vertices[y].point /*+ (Vector2)tPos*/;
-                //    Vector3 secondPoint = road2D.vertices[(y + 1) % road2D.vertices.Length].point /*+ (Vector2)tPos*/;
-
-                //    Helpers.DrawLine(firstPoint, secondPoint);
-                //}
-                #endregion
-
                 for (int y = 0; y < road2D.vertices.Length; y++)
                 {
                     Vector3 roadpoint = road2D.vertices[y].point;
@@ -153,12 +129,9 @@ public class BezierPath : MonoBehaviour
                     Gizmos.color = Color.yellow;
 
                     Vector3 firstPoint = tPos + (rot * road2D.vertices[y].point);
-                    Vector3 secondPoint = tPos + (rot * road2D.vertices[(y + 1) % road2D.vertices.Length].point) /*+ (Vector2)tPos*/;
+                    Vector3 secondPoint = tPos + (rot * road2D.vertices[(y + 1) % road2D.vertices.Length].point);
 
                     Helpers.DrawLine(firstPoint, secondPoint);
-
-
-
                 }
             }
 
