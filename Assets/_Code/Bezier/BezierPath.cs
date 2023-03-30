@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using System.Linq;
 
 public class BezierPath : MonoBehaviour
 {
@@ -30,6 +31,9 @@ public class BezierPath : MonoBehaviour
     #endregion
 
     #region Functions
+
+
+
     [ContextMenu("Get All Points")]
     private void GetAllPoints()
     {
@@ -90,11 +94,34 @@ public class BezierPath : MonoBehaviour
             Quaternion rot = Quaternion.LookRotation(tDir);
 
             Gizmos.color = new Color(100, 100, 100);
+
             Gizmos.DrawSphere(tPos + (rot * Vector3.right), 0.2f);
+            Gizmos.DrawSphere(tPos + (rot * Vector3.right * 2f), 0.2f);
+            Gizmos.DrawSphere(tPos + (rot * Vector3.up), 0.2f);
+            Gizmos.DrawSphere(tPos + (rot * Vector3.up * 2f), 0.2f);
+            Gizmos.DrawSphere(tPos + (rot * Vector3.left), 0.2f);
+            Gizmos.DrawSphere(tPos + (rot * Vector3.left * 2f), 0.2f);
 
             //Handles.PositionHandle(tPos, rot);
 
             // ROAD
+            #region Old
+            //for (int y = 0; y < road2D.vertices.Length; y++)
+            //{
+            //    Vector3 roadpoint = road2D.vertices[y].point;
+
+            //    Gizmos.color = Color.yellow;
+            //    //Gizmos.DrawSphere(tPos + rot * roadpoint, 0.25f);
+
+            //    //Vector3 firstPoint = road2D.vertices[y].point + (Vector2)tPos;
+            //    //Vector3 secondPoint = road2D.vertices[(y + 1) % road2D.vertices.Length].point + (Vector2)tPos;
+            //    Vector3 firstPoint = road2D.vertices[y].point /*+ (Vector2)tPos*/;
+            //    Vector3 secondPoint = road2D.vertices[(y + 1) % road2D.vertices.Length].point /*+ (Vector2)tPos*/;
+
+            //    Helpers.DrawLine(firstPoint, secondPoint);
+            //}
+            #endregion
+
             for (int y = 0; y < road2D.vertices.Length; y++)
             {
                 Vector3 roadpoint = road2D.vertices[y].point;
@@ -102,12 +129,11 @@ public class BezierPath : MonoBehaviour
                 Gizmos.color = Color.yellow;
                 //Gizmos.DrawSphere(tPos + rot * roadpoint, 0.25f);
 
-                Vector3 firstPoint = road2D.vertices[y].point + (Vector2)tPos;
-                Vector3 secondPoint = road2D.vertices[(y + 1) % road2D.vertices.Length].point + (Vector2)tPos;
+                Vector3 firstPoint = tPos + (rot * road2D.vertices[y].point);
+                Vector3 secondPoint = tPos + (rot * road2D.vertices[(y + 1) % road2D.vertices.Length].point) /*+ (Vector2)tPos*/;
 
                 Helpers.DrawLine(firstPoint, secondPoint);
             }
-
         }
 
     }
@@ -139,6 +165,7 @@ public class BezierPath : MonoBehaviour
 
         return (PtXY - PtYZ).normalized;
     }
+
     #endregion
 }
 
@@ -171,4 +198,6 @@ static class Helpers
     {
 
     }
+
+    
 }
