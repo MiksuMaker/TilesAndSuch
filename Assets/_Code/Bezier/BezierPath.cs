@@ -77,20 +77,27 @@ public class BezierPath : MonoBehaviour
         int pointCount = points.Count;
         if (pointCount < 3) { drawLoop = false; }
 
+        // Ready the List of Points
+        List<Vector3> previousRoadPos = new List<Vector3>();
+        List<Quaternion> previousRoadRots = new List<Quaternion>();
+
+
         // Draw Bezier Path
         for (int i = 0; i < pointCount; i++)
         {
-                Handles.DrawBezier(points[i].transform.position,
-                                   points[(i + 1) % pointCount].transform.position,
-                                   points[i].control1.position,
-                                   points[(i + 1) % pointCount].control0.position,
-                                   Color.white, default, 2f
-                                   );
+            Handles.DrawBezier(points[i].transform.position,
+                               points[(i + 1) % pointCount].transform.position,
+                               points[i].control1.position,
+                               points[(i + 1) % pointCount].control0.position,
+                               Color.white, default, 2f
+                               );
 
 
             // Modify travel
             float travel = 0f;
 
+
+            // GET POINTS ON THE ROAD
             for (int u = 0; u < pointsBetween; u++)
             {
                 travel += (1 / (float)pointsBetween);
@@ -110,12 +117,18 @@ public class BezierPath : MonoBehaviour
                 Gizmos.color = new Color(100, 100, 100);
 
 
-                Vector3 randPos = tPos + (rot * Vector3.up * Random.Range(1, 5));
-                Gizmos.DrawSphere(randPos, 1f);
+
+                previousRoadPos.Add(tPos);
+                previousRoadRots.Add(rot);
+
+
+
+                //Vector3 randPos = tPos + (rot * Vector3.up * Random.Range(1, 5));
+                //Gizmos.DrawSphere(randPos, 1f);
 
                 //Handles.PositionHandle(tPos, rot);
 
-                // ROAD
+                // ROAD CROSS SECTION
                 #region Old
                 //for (int y = 0; y < road2D.vertices.Length; y++)
                 //{
@@ -138,21 +151,35 @@ public class BezierPath : MonoBehaviour
                     Vector3 roadpoint = road2D.vertices[y].point;
 
                     Gizmos.color = Color.yellow;
-                    //Gizmos.DrawSphere(tPos + rot * roadpoint, 0.25f);
 
                     Vector3 firstPoint = tPos + (rot * road2D.vertices[y].point);
                     Vector3 secondPoint = tPos + (rot * road2D.vertices[(y + 1) % road2D.vertices.Length].point) /*+ (Vector2)tPos*/;
 
                     Helpers.DrawLine(firstPoint, secondPoint);
 
-                    // Draw lines between different cross sections
-                    BezierPoint nextPoint = points[(i + 1) % points.Count];
 
-                    //Vector3 p1 = nextPoint.
+
                 }
             }
+
         }
 
+        for (int k = 0; k < previousRoadPos.Count; k++)
+        {
+
+            // LINES BETWEEN THE CROSS SECTIONS
+            for (int y = 0; y < road2D.vertices.Length - 1; y++)
+            {
+                int b = previousRoadPos.Count;
+
+                Vector3 p1 = previousRoadPos[k] + (previousRoadRots[k] * road2D.vertices[y].point);
+                Vector3 p2 = previousRoadPos[(k + 1) % b]
+                                + (previousRoadRots[(k + 1) % b]
+                                * road2D.vertices[y].point);
+
+                Helpers.DrawLine(p1, p2);
+            }
+        }
     }
 
     Vector3 GetBezierPosition(float t, BezierPoint pt1, BezierPoint pt2)
