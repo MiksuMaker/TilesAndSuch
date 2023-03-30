@@ -247,7 +247,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   control0: {fileID: 1232392519}
   control1: {fileID: 755563163}
-  anchor: {x: -11.731651, y: 0.5500002, z: 7.7199078}
+  anchor: {x: -15.5, y: 0.5500002, z: 7}
 --- !u!4 &348081492
 Transform:
   m_ObjectHideFlags: 0
@@ -256,7 +256,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 348081490}
   m_LocalRotation: {x: -0, y: 0.939354, z: -0, w: 0.34294915}
-  m_LocalPosition: {x: -11.731651, y: 4.3, z: 7.7199078}
+  m_LocalPosition: {x: -15.5, y: 4.3, z: 7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
