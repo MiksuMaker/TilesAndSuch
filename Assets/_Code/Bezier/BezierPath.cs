@@ -15,8 +15,14 @@ public class BezierPath : MonoBehaviour
     [SerializeField]
     List<BezierPoint> points = new List<BezierPoint>();
 
-    [Range(0, 1)]
-    [SerializeField] float travel = 0;
+    [SerializeField]
+    //[Min(1)]
+    [Range(1, 10)]
+    int pointsBetween = 2;
+
+    //[Range(0, 1)]
+    //[SerializeField] 
+    //float travel = 0;
     #endregion
 
 
@@ -74,65 +80,76 @@ public class BezierPath : MonoBehaviour
         // Draw Bezier Path
         for (int i = 0; i < pointCount; i++)
         {
-            Handles.DrawBezier(points[i].transform.position,
-                               //points[i + 1].transform.position,
-                               points[(i + 1) % pointCount].transform.position,
-                               points[i].control1.position,
-                               //points[i + 1].control0.position,
-                               points[(i + 1) % pointCount].control0.position,
-                               Color.white, default, 2f
-                               );
+                Handles.DrawBezier(points[i].transform.position,
+                                   points[(i + 1) % pointCount].transform.position,
+                                   points[i].control1.position,
+                                   points[(i + 1) % pointCount].control0.position,
+                                   Color.white, default, 2f
+                                   );
 
-            // POSITION
-            Vector3 tPos = GetBezierPosition(travel, points[i % points.Count], points[(i + 1) % points.Count]);
 
-            Gizmos.color = Color.red;
-            Gizmos.DrawSphere(tPos, 0.3f);
+            // Modify travel
+            float travel = 0f;
 
-            // ROTATIOOOON
-            Vector3 tDir = GetBezierDirection(travel, points[i % points.Count], points[(i + 1) % points.Count]);
-            Quaternion rot = Quaternion.LookRotation(tDir);
-
-            Gizmos.color = new Color(100, 100, 100);
-
-            Gizmos.DrawSphere(tPos + (rot * Vector3.right), 0.2f);
-            Gizmos.DrawSphere(tPos + (rot * Vector3.right * 2f), 0.2f);
-            Gizmos.DrawSphere(tPos + (rot * Vector3.up), 0.2f);
-            Gizmos.DrawSphere(tPos + (rot * Vector3.up * 2f), 0.2f);
-            Gizmos.DrawSphere(tPos + (rot * Vector3.left), 0.2f);
-            Gizmos.DrawSphere(tPos + (rot * Vector3.left * 2f), 0.2f);
-
-            //Handles.PositionHandle(tPos, rot);
-
-            // ROAD
-            #region Old
-            //for (int y = 0; y < road2D.vertices.Length; y++)
-            //{
-            //    Vector3 roadpoint = road2D.vertices[y].point;
-
-            //    Gizmos.color = Color.yellow;
-            //    //Gizmos.DrawSphere(tPos + rot * roadpoint, 0.25f);
-
-            //    //Vector3 firstPoint = road2D.vertices[y].point + (Vector2)tPos;
-            //    //Vector3 secondPoint = road2D.vertices[(y + 1) % road2D.vertices.Length].point + (Vector2)tPos;
-            //    Vector3 firstPoint = road2D.vertices[y].point /*+ (Vector2)tPos*/;
-            //    Vector3 secondPoint = road2D.vertices[(y + 1) % road2D.vertices.Length].point /*+ (Vector2)tPos*/;
-
-            //    Helpers.DrawLine(firstPoint, secondPoint);
-            //}
-            #endregion
-
-            for (int y = 0; y < road2D.vertices.Length; y++)
+            for (int u = 0; u < pointsBetween; u++)
             {
-                Vector3 roadpoint = road2D.vertices[y].point;
+                travel += (1 / (float)pointsBetween);
 
-                Gizmos.color = Color.yellow;
-                //Gizmos.DrawSphere(tPos + rot * roadpoint, 0.25f);
+                //travel = Random.Range(0f, 1f);
 
-                Vector3 firstPoint = tPos + (rot * road2D.vertices[y].point);
-                Vector3 secondPoint = tPos + (rot * road2D.vertices[(y + 1) % road2D.vertices.Length].point) /*+ (Vector2)tPos*/;
+                // POSITION
+                Vector3 tPos = GetBezierPosition(travel, points[i % points.Count], points[(i + 1) % points.Count]);
 
-                Helpers.DrawLine(firstPoint, secondPoint);
+                Gizmos.color = Color.red;
+                Gizmos.DrawSphere(tPos, 0.3f);
+
+                // ROTATIOOOON
+                Vector3 tDir = GetBezierDirection(travel, points[i % points.Count], points[(i + 1) % points.Count]);
+                Quaternion rot = Quaternion.LookRotation(tDir);
+
+                Gizmos.color = new Color(100, 100, 100);
+
+
+                Vector3 randPos = tPos + (rot * Vector3.up * Random.Range(1, 5));
+                Gizmos.DrawSphere(randPos, 1f);
+
+                //Handles.PositionHandle(tPos, rot);
+
+                // ROAD
+                #region Old
+                //for (int y = 0; y < road2D.vertices.Length; y++)
+                //{
+                //    Vector3 roadpoint = road2D.vertices[y].point;
+
+                //    Gizmos.color = Color.yellow;
+                //    //Gizmos.DrawSphere(tPos + rot * roadpoint, 0.25f);
+
+                //    //Vector3 firstPoint = road2D.vertices[y].point + (Vector2)tPos;
+                //    //Vector3 secondPoint = road2D.vertices[(y + 1) % road2D.vertices.Length].point + (Vector2)tPos;
+                //    Vector3 firstPoint = road2D.vertices[y].point /*+ (Vector2)tPos*/;
+                //    Vector3 secondPoint = road2D.vertices[(y + 1) % road2D.vertices.Length].point /*+ (Vector2)tPos*/;
+
+                //    Helpers.DrawLine(firstPoint, secondPoint);
+                //}
+                #endregion
+
+                for (int y = 0; y < road2D.vertices.Length; y++)
+                {
+                    Vector3 roadpoint = road2D.vertices[y].point;
+
+                    Gizmos.color = Color.yellow;
+                    //Gizmos.DrawSphere(tPos + rot * roadpoint, 0.25f);
+
+                    Vector3 firstPoint = tPos + (rot * road2D.vertices[y].point);
+                    Vector3 secondPoint = tPos + (rot * road2D.vertices[(y + 1) % road2D.vertices.Length].point) /*+ (Vector2)tPos*/;
+
+                    Helpers.DrawLine(firstPoint, secondPoint);
+
+                    // Draw lines between different cross sections
+                    BezierPoint nextPoint = points[(i + 1) % points.Count];
+
+                    //Vector3 p1 = nextPoint.
+                }
             }
         }
 
@@ -199,5 +216,5 @@ static class Helpers
 
     }
 
-    
+
 }

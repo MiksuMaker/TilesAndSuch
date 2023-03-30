@@ -16,7 +16,7 @@ public class Mesh2D : ScriptableObject
         public Vector2 point;
         public Vector2 normal;
 
-        // UV?
+        //float u;
     }
 
     public Vertex[] vertices;
