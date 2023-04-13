@@ -20,7 +20,8 @@ public class BezierPath : MonoBehaviour
     [Range(1, 10)]
     int pointsBetween = 2;
 
-    [SerializeField] int arbitraryDivider = 15;
+    [SerializeField]
+    bool gizmosOn = false;
 
     //[SerializeField]
     //bool fullCircle = true;
@@ -209,6 +210,7 @@ public class BezierPath : MonoBehaviour
         //Vector3[] verts = new Vector3[pointCount * road2D.vertices.Length];
         //int[] tri_indices = new int[pointCount * road2D.vertices.Length];
         List<int> tri_indices = new List<int>();
+        List<Vector2> uvs = new List<Vector2>();
 
         // Draw Bezier Path
         for (int i = 0; i < pointCount; i++)
@@ -259,7 +261,8 @@ public class BezierPath : MonoBehaviour
                     Vector3 firstPoint = tPos + (rot * road2D.vertices[y].point);
                     Vector3 secondPoint = tPos + (rot * road2D.vertices[(y + 1) % road2D.vertices.Length].point);
 
-                    Helpers.DrawLine(firstPoint, secondPoint);
+                    
+                    if (gizmosOn) { Helpers.DrawLine(firstPoint, secondPoint); }
                 }
             }
 
@@ -279,7 +282,7 @@ public class BezierPath : MonoBehaviour
                                 + (previousRoadRots[(k + 1) % b]
                                 * road2D.vertices[y].point);
 
-                Helpers.DrawLine(p1, p2);
+                if (gizmosOn) { Helpers.DrawLine(p1, p2); }
 
                 // Add Verts
                 verts.Add(p1);
@@ -294,32 +297,6 @@ public class BezierPath : MonoBehaviour
             int divider = (previousRoadPos.Count * (road2D.vertices.Length - 1));
             //int divider = verts.Count;
             //int divider = arbitraryDivider;
-
-            // Get MESH
-            //for (int v = 0; v < road2D.vertices.Length; v += 2)
-            //for (int v = 0; v < 12; v+=2)
-            //{
-            //    //int r = u * road2D.vertices.Length / 2;
-
-            //    //tri_indices.Add(r + v);
-            //    //tri_indices.Add(r + v + 16);
-            //    //tri_indices.Add(r + v + 7);
-
-            //    //tri_indices.Add(r + v);
-            //    //tri_indices.Add(r + v + 7 + 16);
-            //    //tri_indices.Add(r + v + 7);
-
-            //    tri_indices.Add(v + r + 0);
-            //    tri_indices.Add(v + r + 2);
-            //    tri_indices.Add(v + r + 16);
-
-            //    tri_indices.Add(v + r + 2);
-            //    tri_indices.Add(v + r + 18);
-            //    tri_indices.Add(v + r + 16);
-
-            //    // 0, 0, 7
-            //    // 0, 7, 7
-            //}
 
             #region Squares
             // Square 1
@@ -382,22 +359,23 @@ public class BezierPath : MonoBehaviour
             tri_indices.Add(r + 28);
 
             tri_indices.Add(r + 14);
-            tri_indices.Add((r + 29) % divider);    // ODD
-            tri_indices.Add((r + 28) % divider);
+            tri_indices.Add(r + 29);    // ODD
+            tri_indices.Add(r + 28);
 
             // 8 --------------------
             tri_indices.Add(r + 14);
             tri_indices.Add(r + 0);
-            tri_indices.Add((r + 16) % divider);
+            tri_indices.Add(r + 16);
 
             tri_indices.Add(r + 14);
-            tri_indices.Add((r + 16) % divider);
-            tri_indices.Add((r + 29) % divider);    // ODD
+            tri_indices.Add(r + 16);
+            tri_indices.Add(r + 29);    // ODD
             #endregion
         }
 
         // Add last ones manually
 
+        #region Last Square
         // Square 1
         tri_indices.Add(last - 14);
         tri_indices.Add(last - 12);
@@ -453,9 +431,6 @@ public class BezierPath : MonoBehaviour
         tri_indices.Add(12);
         tri_indices.Add(10);    // ODD
 
-
-
-
         //7--------------------
         tri_indices.Add(last - 3);
         tri_indices.Add(last - 1);
@@ -473,28 +448,53 @@ public class BezierPath : MonoBehaviour
         tri_indices.Add(last - 14);
         tri_indices.Add(0);
         tri_indices.Add(14);    // ODD
+        #endregion
+
+        // Add UVs
+        for (int i = 0; i < previousRoadPos.Count - 1; i++)
+        {
+            // Add posiion on the UV map
+
+            uvs.Add(new Vector2(0.2f, 0));  // Begin
+            uvs.Add(new Vector2(0.1f, 0));
+            uvs.Add(new Vector2(0f, 0));    // Left corner top
+            uvs.Add(new Vector2(0f, 0));
+            uvs.Add(new Vector2(0f, 0));    // Right corner bottom
+            uvs.Add(new Vector2(1f, 0));    // Right corner top
+            uvs.Add(new Vector2(0.9f, 0));
+            uvs.Add(new Vector2(0.8f, 0)); // End?
+
+
+            uvs.Add(new Vector2(0.2f, 1));  // Begin
+            uvs.Add(new Vector2(0.1f, 1));
+            uvs.Add(new Vector2(0f, 1));    // Left corner top
+            uvs.Add(new Vector2(0f, 1));
+            uvs.Add(new Vector2(0f, 1));    // Right corner bottom
+            uvs.Add(new Vector2(1f, 1));    // Right corner top
+            uvs.Add(new Vector2(0.9f, 1));
+            uvs.Add(new Vector2(0.8f, 1)); // End?
+        }
+        uvs.Add(new Vector2(0.2f, 0));  // Begin
+        uvs.Add(new Vector2(0.1f, 0));
+        uvs.Add(new Vector2(0f, 0));    // Left corner top
+        uvs.Add(new Vector2(0f, 0));
+        uvs.Add(new Vector2(0f, 0));    // Right corner bottom
+        uvs.Add(new Vector2(1f, 0));    // Right corner top
+        uvs.Add(new Vector2(0.9f, 0));
+        uvs.Add(new Vector2(0.8f, 0)); // End?
+
+
+        uvs.Add(new Vector2(0.2f, 1));  // Begin
+        uvs.Add(new Vector2(0.1f, 1));
 
 
         Debug.Log("Verts: " + verts.Count);
-        //tri_indices.Add(0);
-        //tri_indices.Add(1);
-        //tri_indices.Add(8);
-
-        //tri_indices.Add(1);
-        //tri_indices.Add(9);
-        //tri_indices.Add(8);
-
-        //tri_indices.Add(firstIndice);
-        //tri_indices.Add(secondIndice);
-        //tri_indices.Add(thirdIndice);
-
-        //tri_indices.Add(BfirstIndice);
-        //tri_indices.Add(BsecondIndice);
-        //tri_indices.Add(BthirdIndice);
+        Debug.Log("UVs  : " + uvs.Count);
 
         mesh.SetVertices(verts);
         mesh.SetTriangles(tri_indices, 0);
         mesh.RecalculateNormals();
+        mesh.SetUVs(0, uvs);
 
         GetComponent<MeshFilter>().sharedMesh = mesh;
     }
