@@ -207,8 +207,6 @@ public class BezierPath : MonoBehaviour
         // Prime Mesh
         Mesh mesh = new Mesh();
         List<Vector3> verts = new List<Vector3>();
-        //Vector3[] verts = new Vector3[pointCount * road2D.vertices.Length];
-        //int[] tri_indices = new int[pointCount * road2D.vertices.Length];
         List<int> tri_indices = new List<int>();
         List<Vector2> uvs = new List<Vector2>();
 
@@ -293,11 +291,6 @@ public class BezierPath : MonoBehaviour
         for (int u = 0; u < previousRoadPos.Count - 1; u++)
         {
             int r = u * (road2D.vertices.Length);
-
-            //int divider = (previousRoadPos.Count * (road2D.vertices.Length - 1));
-            //int divider = verts.Count;
-            //int divider = arbitraryDivider;
-
 
             #region Squares
             // Square 1
@@ -484,7 +477,7 @@ public class BezierPath : MonoBehaviour
             uvs.Add(new Vector2(0.8f, o)); // End?
             uvs.Add(new Vector2(0.8f, o)); // End?
 
-
+            #region Old
             //uvs.Add(new Vector2(0.2f, 0));  // Begin
             //uvs.Add(new Vector2(0.1f, 0));
             //uvs.Add(new Vector2(0f, 0));    // Left corner top
@@ -527,24 +520,10 @@ public class BezierPath : MonoBehaviour
 
             //uvs.Add(new Vector2(0.8f, 0)); // End?
             //uvs.Add(new Vector2(0.8f, 1)); // End?
-
+            #endregion
 
         }
-
-
-
-        //uvs.Add(new Vector2(0.2f, 0));  // Begin
-        //uvs.Add(new Vector2(0.1f, 0));
-        //uvs.Add(new Vector2(0f, 0));    // Left corner top
-        //uvs.Add(new Vector2(0f, 0));
-        //uvs.Add(new Vector2(0f, 0));    // Right corner bottom
-        //uvs.Add(new Vector2(1f, 0));    // Right corner top
-        //uvs.Add(new Vector2(0.9f, 0));
-        //uvs.Add(new Vector2(0.8f, 0)); // End?
         #endregion
-
-        //uvs.Add(new Vector2(0.2f, 1));  // Begin
-        //uvs.Add(new Vector2(0.1f, 1));
 
 
         Debug.Log("Verts: " + verts.Count);
