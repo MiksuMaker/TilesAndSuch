@@ -23,16 +23,13 @@ public class BezierPath : MonoBehaviour
     [SerializeField]
     bool gizmosOn = false;
 
-    //[SerializeField]
-    //bool fullCircle = true;
+    [SerializeField]
+    bool dontLoop = true;
     //[Range(0, 1)]
     //[SerializeField] 
     //float travel = 0;
     #endregion
 
-
-    #region
-    #endregion
 
     #region Gizmos
     private void OnDrawGizmos()
@@ -211,7 +208,7 @@ public class BezierPath : MonoBehaviour
         List<Vector2> uvs = new List<Vector2>();
 
         // Draw Bezier Path
-        for (int i = 0; i < pointCount; i++)
+        for (int i = 0; i < pointCount - System.Convert.ToInt32(dontLoop); i++)
         {
             Handles.DrawBezier(points[i].transform.position,
                                points[(i + 1) % pointCount].transform.position,
@@ -259,19 +256,21 @@ public class BezierPath : MonoBehaviour
                     Vector3 firstPoint = tPos + (rot * road2D.vertices[y].point);
                     Vector3 secondPoint = tPos + (rot * road2D.vertices[(y + 1) % road2D.vertices.Length].point);
 
-                    
+
                     if (gizmosOn) { Helpers.DrawLine(firstPoint, secondPoint); }
                 }
             }
 
         }
 
-        for (int k = 0; k < previousRoadPos.Count; k++)
+        int pointsCount = previousRoadPos.Count;
+        //int pointsCount = previousRoadPos.Count - System.Convert.ToInt32(dontLoop);
+
+        for (int k = 0; k < pointsCount; k++)
         {
 
             // LINES BETWEEN THE CROSS SECTIONS
             for (int y = 0; y < road2D.vertices.Length; y++)
-            //for (int y = 0; y < road2D.vertices.Length - 1; y += 2)
             {
                 int b = previousRoadPos.Count;
 
@@ -287,8 +286,8 @@ public class BezierPath : MonoBehaviour
             }
         }
 
-        int last = previousRoadPos.Count * (road2D.vertices.Length);
-        for (int u = 0; u < previousRoadPos.Count - 1; u++)
+        int last = pointsCount * (road2D.vertices.Length);
+        for (int u = 0; u < pointsCount - 1; u++)
         {
             int r = u * (road2D.vertices.Length);
 
@@ -371,78 +370,81 @@ public class BezierPath : MonoBehaviour
         // Add last ones manually
 
         #region Last Square
-        // Square 1
-        tri_indices.Add(last - 16);
-        tri_indices.Add(last - 14);
-        tri_indices.Add(0);
+        if (!dontLoop)
+        {
+            // Square 1
+            tri_indices.Add(last - 16);
+            tri_indices.Add(last - 14);
+            tri_indices.Add(0);
 
-        tri_indices.Add(last - 14);
-        tri_indices.Add(2);
-        tri_indices.Add(0);
+            tri_indices.Add(last - 14);
+            tri_indices.Add(2);
+            tri_indices.Add(0);
 
 
-        //// 2
-        tri_indices.Add(last - 14);
-        tri_indices.Add(last - 12);
-        tri_indices.Add(2);
+            //// 2
+            tri_indices.Add(last - 14);
+            tri_indices.Add(last - 12);
+            tri_indices.Add(2);
 
-        tri_indices.Add(last - 12);
-        tri_indices.Add(4);
-        tri_indices.Add(2);
+            tri_indices.Add(last - 12);
+            tri_indices.Add(4);
+            tri_indices.Add(2);
 
-        // 3
-        tri_indices.Add(last - 12);
-        tri_indices.Add(last - 10);
-        tri_indices.Add(4);
+            // 3
+            tri_indices.Add(last - 12);
+            tri_indices.Add(last - 10);
+            tri_indices.Add(4);
 
-        tri_indices.Add(last - 10);
-        tri_indices.Add(6);
-        tri_indices.Add(4);
+            tri_indices.Add(last - 10);
+            tri_indices.Add(6);
+            tri_indices.Add(4);
 
-        // 4 --------------------
-        tri_indices.Add(last - 10);
-        tri_indices.Add(last - 8);
-        tri_indices.Add(6);
+            // 4 --------------------
+            tri_indices.Add(last - 10);
+            tri_indices.Add(last - 8);
+            tri_indices.Add(6);
 
-        tri_indices.Add(last - 8);
-        tri_indices.Add(8);    // ODD
-        tri_indices.Add(6);
+            tri_indices.Add(last - 8);
+            tri_indices.Add(8);    // ODD
+            tri_indices.Add(6);
 
-        // 5 --------------------
-        tri_indices.Add(last - 8);
-        tri_indices.Add(last - 6);
-        tri_indices.Add(8);    // ODD
+            // 5 --------------------
+            tri_indices.Add(last - 8);
+            tri_indices.Add(last - 6);
+            tri_indices.Add(8);    // ODD
 
-        tri_indices.Add(last - 6);
-        tri_indices.Add(10);
-        tri_indices.Add(8);    // ODD
+            tri_indices.Add(last - 6);
+            tri_indices.Add(10);
+            tri_indices.Add(8);    // ODD
 
-        // 6 --------------------
-        tri_indices.Add(last - 6);
-        tri_indices.Add(last - 4);
-        tri_indices.Add(10);    // ODD
+            // 6 --------------------
+            tri_indices.Add(last - 6);
+            tri_indices.Add(last - 4);
+            tri_indices.Add(10);    // ODD
 
-        tri_indices.Add(last - 4);
-        tri_indices.Add(12);
-        tri_indices.Add(10);    // ODD
+            tri_indices.Add(last - 4);
+            tri_indices.Add(12);
+            tri_indices.Add(10);    // ODD
 
-        //7--------------------
-        tri_indices.Add(last - 4);
-        tri_indices.Add(last - 2);
-        tri_indices.Add(12);
+            //7--------------------
+            tri_indices.Add(last - 4);
+            tri_indices.Add(last - 2);
+            tri_indices.Add(12);
 
-        tri_indices.Add(last - 2);
-        tri_indices.Add(14);    // ODD
-        tri_indices.Add(12);
+            tri_indices.Add(last - 2);
+            tri_indices.Add(14);    // ODD
+            tri_indices.Add(12);
 
-        // 8 --------------------
-        tri_indices.Add(last - 2);
-        tri_indices.Add(last - 16);
-        tri_indices.Add(14);
+            // 8 --------------------
+            tri_indices.Add(last - 2);
+            tri_indices.Add(last - 16);
+            tri_indices.Add(14);
 
-        tri_indices.Add(last - 16);
-        tri_indices.Add(0);
-        tri_indices.Add(14);    // ODD
+            tri_indices.Add(last - 16);
+            tri_indices.Add(0);
+            tri_indices.Add(14);    // ODD
+        }
         #endregion
 
         #region UVs
