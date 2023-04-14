@@ -272,7 +272,7 @@ public class BezierPath : MonoBehaviour
         {
 
             // LINES BETWEEN THE CROSS SECTIONS
-            for (int y = 0; y < road2D.vertices.Length - 1; y++)
+            for (int y = 0; y < road2D.vertices.Length; y++)
             //for (int y = 0; y < road2D.vertices.Length - 1; y += 2)
             {
                 int b = previousRoadPos.Count;
@@ -289,14 +289,15 @@ public class BezierPath : MonoBehaviour
             }
         }
 
-        int last = previousRoadPos.Count * (road2D.vertices.Length - 1);
+        int last = previousRoadPos.Count * (road2D.vertices.Length);
         for (int u = 0; u < previousRoadPos.Count - 1; u++)
         {
-            int r = u * (road2D.vertices.Length - 1);
+            int r = u * (road2D.vertices.Length);
 
-            int divider = (previousRoadPos.Count * (road2D.vertices.Length - 1));
+            //int divider = (previousRoadPos.Count * (road2D.vertices.Length - 1));
             //int divider = verts.Count;
             //int divider = arbitraryDivider;
+
 
             #region Squares
             // Square 1
@@ -307,6 +308,7 @@ public class BezierPath : MonoBehaviour
             tri_indices.Add(r + 2);
             tri_indices.Add(r + 18);
             tri_indices.Add(r + 16);
+
 
             // 2
             tri_indices.Add(r + 2);
@@ -332,26 +334,26 @@ public class BezierPath : MonoBehaviour
             tri_indices.Add(r + 22);
 
             tri_indices.Add(r + 8);
-            tri_indices.Add(r + 23);    // ODD
+            tri_indices.Add(r + 24);    // ODD
             tri_indices.Add(r + 22);
 
             // 5 --------------------
             tri_indices.Add(r + 8);
             tri_indices.Add(r + 10);
-            tri_indices.Add(r + 23);    // ODD
+            tri_indices.Add(r + 24);    // ODD
 
             tri_indices.Add(r + 10);
             tri_indices.Add(r + 26);
-            tri_indices.Add(r + 23);    // ODD
+            tri_indices.Add(r + 24);    // ODD
 
             // 6 --------------------
             tri_indices.Add(r + 10);
             tri_indices.Add(r + 12);
-            tri_indices.Add(r + 25);    // ODD
+            tri_indices.Add(r + 26);    // ODD
 
             tri_indices.Add(r + 12);
             tri_indices.Add(r + 28);
-            tri_indices.Add(r + 25);    // ODD
+            tri_indices.Add(r + 26);    // ODD
 
             // 7 --------------------
             tri_indices.Add(r + 12);
@@ -359,7 +361,7 @@ public class BezierPath : MonoBehaviour
             tri_indices.Add(r + 28);
 
             tri_indices.Add(r + 14);
-            tri_indices.Add(r + 29);    // ODD
+            tri_indices.Add(r + 30);    // ODD
             tri_indices.Add(r + 28);
 
             // 8 --------------------
@@ -369,7 +371,7 @@ public class BezierPath : MonoBehaviour
 
             tri_indices.Add(r + 14);
             tri_indices.Add(r + 16);
-            tri_indices.Add(r + 29);    // ODD
+            tri_indices.Add(r + 30);    // ODD
             #endregion
         }
 
@@ -377,115 +379,172 @@ public class BezierPath : MonoBehaviour
 
         #region Last Square
         // Square 1
-        tri_indices.Add(last - 14);
-        tri_indices.Add(last - 12);
-        tri_indices.Add(0);
+        //tri_indices.Add(last - 10);
+        //tri_indices.Add(last - 8);
+        //tri_indices.Add(0);
 
-        tri_indices.Add(last - 12);
-        tri_indices.Add(2);
-        tri_indices.Add(0);
+        //tri_indices.Add(last - 8);
+        //tri_indices.Add(2);
+        //tri_indices.Add(0);
 
 
-        // 2
-        tri_indices.Add(last - 12);
-        tri_indices.Add(last - 10);
-        tri_indices.Add(2);
+        ////// 2
+        //tri_indices.Add(last - 8);
+        //tri_indices.Add(last - 6);
+        //tri_indices.Add(2);
 
-        tri_indices.Add(last - 10);
-        tri_indices.Add(4);
-        tri_indices.Add(2);
+        //tri_indices.Add(last - 6);
+        //tri_indices.Add(4);
+        //tri_indices.Add(2);
 
-        // 3
-        tri_indices.Add(last - 10);
-        tri_indices.Add(last - 8);
-        tri_indices.Add(4);
+        //// 3
+        //tri_indices.Add(last - 6);
+        //tri_indices.Add(last - 4);
+        //tri_indices.Add(4);
 
-        tri_indices.Add(last - 8);
-        tri_indices.Add(6);
-        tri_indices.Add(4);
+        //tri_indices.Add(last - 4);
+        //tri_indices.Add(6);
+        //tri_indices.Add(4);
 
-        // 4 --------------------
-        tri_indices.Add(last - 8);
-        tri_indices.Add(last - 7);
-        tri_indices.Add(6);
+        ////// 4 --------------------
+        //tri_indices.Add(last - 4);
+        //tri_indices.Add(last - 2);
+        //tri_indices.Add(6);
 
-        tri_indices.Add(last - 7);
-        tri_indices.Add(8);    // ODD
-        tri_indices.Add(6);
+        //tri_indices.Add(last - 2);
+        //tri_indices.Add(8);    // ODD
+        //tri_indices.Add(6);
 
-        // 5 --------------------
-        tri_indices.Add(last - 7);
-        tri_indices.Add(last - 5);
-        tri_indices.Add(8);    // ODD
+        //// 5 --------------------
+        //tri_indices.Add(last - 2);
+        //tri_indices.Add(last);
+        //tri_indices.Add(8);    // ODD
 
-        tri_indices.Add(last - 5);
-        tri_indices.Add(10);
-        tri_indices.Add(8);    // ODD
+        //tri_indices.Add(last);
+        //tri_indices.Add(10);
+        //tri_indices.Add(8);    // ODD
 
-        // 6 --------------------
-        tri_indices.Add(last - 5);
-        tri_indices.Add(last - 3);
-        tri_indices.Add(10);    // ODD
+        //// 6 --------------------
+        //tri_indices.Add(last);
+        //tri_indices.Add(last + 2);
+        //tri_indices.Add(10);    // ODD
 
-        tri_indices.Add(last - 3);
-        tri_indices.Add(12);
-        tri_indices.Add(10);    // ODD
+        //tri_indices.Add(last + 2);
+        //tri_indices.Add(12);
+        //tri_indices.Add(10);    // ODD
 
-        //7--------------------
-        tri_indices.Add(last - 3);
-        tri_indices.Add(last - 1);
-        tri_indices.Add(12);
+        ////7--------------------
+        //tri_indices.Add(last + 2);
+        //tri_indices.Add(last + 4);
+        //tri_indices.Add(12);
 
-        tri_indices.Add(last - 1);
-        tri_indices.Add(14);    // ODD
-        tri_indices.Add(12);
+        //tri_indices.Add(last + 4);
+        //tri_indices.Add(14);    // ODD
+        //tri_indices.Add(12);
 
-        // 8 --------------------
-        tri_indices.Add(last - 1);
-        tri_indices.Add(last - 14);
-        tri_indices.Add(14);
+        //// 8 --------------------
+        //tri_indices.Add(last + 4);
+        //tri_indices.Add(last - 10);
+        //tri_indices.Add(14);
 
-        tri_indices.Add(last - 14);
-        tri_indices.Add(0);
-        tri_indices.Add(14);    // ODD
+        //tri_indices.Add(last - 10);
+        //tri_indices.Add(0);
+        //tri_indices.Add(14);    // ODD
         #endregion
 
+        #region UVs
         // Add UVs
-        for (int i = 0; i < previousRoadPos.Count - 1; i++)
+        for (int i = 0; i < previousRoadPos.Count; i++)
         {
             // Add posiion on the UV map
 
-            uvs.Add(new Vector2(0.2f, 0));  // Begin
-            uvs.Add(new Vector2(0.1f, 0));
-            uvs.Add(new Vector2(0f, 0));    // Left corner top
-            uvs.Add(new Vector2(0f, 0));
-            uvs.Add(new Vector2(0f, 0));    // Right corner bottom
-            uvs.Add(new Vector2(1f, 0));    // Right corner top
-            uvs.Add(new Vector2(0.9f, 0));
-            uvs.Add(new Vector2(0.8f, 0)); // End?
+            int o = i % 2 == 0 ? 0 : 1;
+
+            uvs.Add(new Vector2(0.2f, o));  // Begin
+            uvs.Add(new Vector2(0.2f, o));  // Begin
+
+            uvs.Add(new Vector2(0.1f, o));
+            uvs.Add(new Vector2(0.1f, o));
+
+            uvs.Add(new Vector2(0f, o));    // Left corner top
+            uvs.Add(new Vector2(0f, o));    // Left corner top
+
+            uvs.Add(new Vector2(0f, o));
+            uvs.Add(new Vector2(0f, o));
+
+            uvs.Add(new Vector2(0f, o));    // Right corner bottom
+            uvs.Add(new Vector2(0f, o));    // Right corner bottom
+
+            uvs.Add(new Vector2(1f, o));    // Right corner top
+            uvs.Add(new Vector2(1f, o));    // Right corner top
+
+            uvs.Add(new Vector2(0.9f, o));
+            uvs.Add(new Vector2(0.9f, o));
+
+            uvs.Add(new Vector2(0.8f, o)); // End?
+            uvs.Add(new Vector2(0.8f, o)); // End?
 
 
-            uvs.Add(new Vector2(0.2f, 1));  // Begin
-            uvs.Add(new Vector2(0.1f, 1));
-            uvs.Add(new Vector2(0f, 1));    // Left corner top
-            uvs.Add(new Vector2(0f, 1));
-            uvs.Add(new Vector2(0f, 1));    // Right corner bottom
-            uvs.Add(new Vector2(1f, 1));    // Right corner top
-            uvs.Add(new Vector2(0.9f, 1));
-            uvs.Add(new Vector2(0.8f, 1)); // End?
+            //uvs.Add(new Vector2(0.2f, 0));  // Begin
+            //uvs.Add(new Vector2(0.1f, 0));
+            //uvs.Add(new Vector2(0f, 0));    // Left corner top
+            //uvs.Add(new Vector2(0f, 0));
+            //uvs.Add(new Vector2(0f, 0));    // Right corner bottom
+            //uvs.Add(new Vector2(1f, 0));    // Right corner top
+            //uvs.Add(new Vector2(0.9f, 0));
+            //uvs.Add(new Vector2(0.8f, 0)); // End?
+
+
+            //uvs.Add(new Vector2(0.2f, 1));  // Begin
+            //uvs.Add(new Vector2(0.1f, 1));
+            //uvs.Add(new Vector2(0f, 1));    // Left corner top
+            //uvs.Add(new Vector2(0f, 1));
+            //uvs.Add(new Vector2(0f, 1));    // Right corner bottom
+            //uvs.Add(new Vector2(1f, 1));    // Right corner top
+            //uvs.Add(new Vector2(0.9f, 1));
+            //uvs.Add(new Vector2(0.8f, 1)); // End?
+
+            //uvs.Add(new Vector2(0.2f, 0));  // Begin
+            //uvs.Add(new Vector2(0.2f, 1));  // Begin
+
+            //uvs.Add(new Vector2(0.1f, 0));
+            //uvs.Add(new Vector2(0.1f, 1));
+
+            //uvs.Add(new Vector2(0f, 0));    // Left corner top
+            //uvs.Add(new Vector2(0f, 1));    // Left corner top
+
+            //uvs.Add(new Vector2(0f, 0));
+            //uvs.Add(new Vector2(0f, 1));
+
+            //uvs.Add(new Vector2(0f, 0));    // Right corner bottom
+            //uvs.Add(new Vector2(0f, 1));    // Right corner bottom
+
+            //uvs.Add(new Vector2(1f, 0));    // Right corner top
+            //uvs.Add(new Vector2(1f, 1));    // Right corner top
+
+            //uvs.Add(new Vector2(0.9f, 0));
+            //uvs.Add(new Vector2(0.9f, 1));
+
+            //uvs.Add(new Vector2(0.8f, 0)); // End?
+            //uvs.Add(new Vector2(0.8f, 1)); // End?
+
+
         }
-        uvs.Add(new Vector2(0.2f, 0));  // Begin
-        uvs.Add(new Vector2(0.1f, 0));
-        uvs.Add(new Vector2(0f, 0));    // Left corner top
-        uvs.Add(new Vector2(0f, 0));
-        uvs.Add(new Vector2(0f, 0));    // Right corner bottom
-        uvs.Add(new Vector2(1f, 0));    // Right corner top
-        uvs.Add(new Vector2(0.9f, 0));
-        uvs.Add(new Vector2(0.8f, 0)); // End?
 
 
-        uvs.Add(new Vector2(0.2f, 1));  // Begin
-        uvs.Add(new Vector2(0.1f, 1));
+
+        //uvs.Add(new Vector2(0.2f, 0));  // Begin
+        //uvs.Add(new Vector2(0.1f, 0));
+        //uvs.Add(new Vector2(0f, 0));    // Left corner top
+        //uvs.Add(new Vector2(0f, 0));
+        //uvs.Add(new Vector2(0f, 0));    // Right corner bottom
+        //uvs.Add(new Vector2(1f, 0));    // Right corner top
+        //uvs.Add(new Vector2(0.9f, 0));
+        //uvs.Add(new Vector2(0.8f, 0)); // End?
+        #endregion
+
+        //uvs.Add(new Vector2(0.2f, 1));  // Begin
+        //uvs.Add(new Vector2(0.1f, 1));
 
 
         Debug.Log("Verts: " + verts.Count);
