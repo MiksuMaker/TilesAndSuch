@@ -30,6 +30,18 @@ public class BezierPath : MonoBehaviour
     [Range(0, 1)]
     [SerializeField]
     float travel = 0;
+
+    public struct PosAndRot
+    {
+        public Vector3 pos;
+        public Vector3 rot;
+
+        public PosAndRot(Vector3 position, Vector3 rotation)
+        {
+            pos = position;
+            rot = rotation;
+        }
+    }
     #endregion
 
 
@@ -541,7 +553,7 @@ public class BezierPath : MonoBehaviour
     }
 
 
-    public void GetPosOnTheRoad(float travel)
+    public PosAndRot GetPosOnTheRoad(float travel)
     {
 
         float thisTravel = travel;
@@ -554,8 +566,8 @@ public class BezierPath : MonoBehaviour
         int currentPoint = Mathf.FloorToInt(travel / increment);
 
 
-        Debug.Log("Travel/Increment ratio: " + travel / increment);
-        Debug.Log("Travel: " + travel + ", currentPoint: " + currentPoint);
+        //Debug.Log("Travel/Increment ratio: " + travel / increment);
+        //Debug.Log("Travel: " + travel + ", currentPoint: " + currentPoint);
 
 
         float travelOnPoint = (travel / increment) % 1f;
@@ -572,18 +584,19 @@ public class BezierPath : MonoBehaviour
         //if (travelOnPoint > 0.985f) { travelOnPoint = 0f; }
 
         Vector3 tPos = GetBezierPosition(travelOnPoint, points[currentPoint % points.Count], points[(currentPoint + 1) % points.Count]);
-        //Vector3 tPos = GetBezierPosition(travelOnPoint, points[currentPoint], points[(currentPoint + 1) % points.Count]);
 
-        Gizmos.color = Color.red;
-        Gizmos.DrawSphere(tPos, 0.3f);
 
         // ROTATIOOOON
-        //Vector3 tDir = GetBezierDirection(travel, points[i % points.Count], points[(i + 1) % points.Count]);
+        Vector3 tDir = GetBezierDirection(travelOnPoint, points[currentPoint % points.Count], points[(currentPoint + 1) % points.Count]);
         //Vector3 tDir = GetBezierDirection(thisTravel, points[0], points[1]);
         //Quaternion rot = Quaternion.LookRotation(tDir);
 
-        // Draw a ball on pos
-        Gizmos.DrawCube(tPos, Vector3.one * 4f);
+        // Draw a box on pos
+        //Gizmos.color = Color.red;
+        //Gizmos.DrawCube(tPos, Vector3.one * 4f);
+        //Gizmos.DrawLine(tPos, tPos - tDir * 15f);
+
+        return new PosAndRot(tPos, tDir);
     }
 }
 #endregion
