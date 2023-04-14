@@ -25,23 +25,26 @@ public class BezierPath : MonoBehaviour
 
     [SerializeField]
     bool dontLoop = true;
-    //[Range(0, 1)]
-    //[SerializeField] 
-    //float travel = 0;
+
+
+    [Range(0, 1)]
+    [SerializeField]
+    float travel = 0;
     #endregion
 
 
     #region Gizmos
     private void OnDrawGizmos()
     {
+        GetPosOnTheRoad(travel);
         CalculatePath();
     }
     #endregion
 
+
+
+
     #region Functions
-
-
-
     [ContextMenu("Get All Points")]
     private void GetAllPoints()
     {
@@ -158,7 +161,7 @@ public class BezierPath : MonoBehaviour
         }
     }
 
-
+    #endregion
 
     Vector3 GetBezierPosition(float t, BezierPoint pt1, BezierPoint pt2)
     {
@@ -187,8 +190,6 @@ public class BezierPath : MonoBehaviour
 
         return (PtXY - PtYZ).normalized;
     }
-
-    #endregion
 
     private void CalculatePath()
     {
@@ -528,8 +529,8 @@ public class BezierPath : MonoBehaviour
         #endregion
 
 
-        Debug.Log("Verts: " + verts.Count);
-        Debug.Log("UVs  : " + uvs.Count);
+        //Debug.Log("Verts: " + verts.Count);
+        //Debug.Log("UVs  : " + uvs.Count);
 
         mesh.SetVertices(verts);
         mesh.SetTriangles(tri_indices, 0);
@@ -537,6 +538,52 @@ public class BezierPath : MonoBehaviour
         mesh.SetUVs(0, uvs);
 
         GetComponent<MeshFilter>().sharedMesh = mesh;
+    }
+
+
+    public void GetPosOnTheRoad(float travel)
+    {
+
+        float thisTravel = travel;
+        thisTravel += (1 / (float)pointsBetween);
+
+
+
+
+        float increment = 1f / points.Count;
+        int currentPoint = Mathf.FloorToInt(travel / increment);
+
+
+        Debug.Log("Travel/Increment ratio: " + travel / increment);
+        Debug.Log("Travel: " + travel + ", currentPoint: " + currentPoint);
+
+
+        float travelOnPoint = (travel / increment) % 1f;
+        //Debug.Log("Travel On point: " + travelOnPoint);
+
+
+        //Debug.Log("Calculation: " + (travel * points.Count) + ", Point: " + currentPoint);
+
+
+        // POSITION
+        //Vector3 tPos = GetBezierPosition(travel, points[i % points.Count], points[(i + 1) % points.Count]);
+        //Vector3 tPos = GetBezierPosition(thisTravel, points[0], points[1]);
+
+        //if (travelOnPoint > 0.985f) { travelOnPoint = 0f; }
+
+        Vector3 tPos = GetBezierPosition(travelOnPoint, points[currentPoint % points.Count], points[(currentPoint + 1) % points.Count]);
+        //Vector3 tPos = GetBezierPosition(travelOnPoint, points[currentPoint], points[(currentPoint + 1) % points.Count]);
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawSphere(tPos, 0.3f);
+
+        // ROTATIOOOON
+        //Vector3 tDir = GetBezierDirection(travel, points[i % points.Count], points[(i + 1) % points.Count]);
+        //Vector3 tDir = GetBezierDirection(thisTravel, points[0], points[1]);
+        //Quaternion rot = Quaternion.LookRotation(tDir);
+
+        // Draw a ball on pos
+        Gizmos.DrawCube(tPos, Vector3.one * 4f);
     }
 }
 #endregion
