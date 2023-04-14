@@ -465,11 +465,11 @@ public class BezierPath : MonoBehaviour
             uvs.Add(new Vector2(0f, o));
             uvs.Add(new Vector2(0f, o));
 
-            uvs.Add(new Vector2(0f, o));    // Right corner bottom
-            uvs.Add(new Vector2(0f, o));    // Right corner bottom
+            uvs.Add(new Vector2(1f, o));    // Right corner bottom
+            uvs.Add(new Vector2(1f, o));    // Right corner bottom
 
-            uvs.Add(new Vector2(1f, o));    // Right corner top
-            uvs.Add(new Vector2(1f, o));    // Right corner top
+            uvs.Add(new Vector2(0.95f, o));    // Right corner top
+            uvs.Add(new Vector2(0.95f, o));    // Right corner top
 
             uvs.Add(new Vector2(0.9f, o));
             uvs.Add(new Vector2(0.9f, o));
