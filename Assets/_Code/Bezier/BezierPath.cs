@@ -372,77 +372,77 @@ public class BezierPath : MonoBehaviour
 
         #region Last Square
         // Square 1
-        //tri_indices.Add(last - 10);
-        //tri_indices.Add(last - 8);
-        //tri_indices.Add(0);
+        tri_indices.Add(last - 16);
+        tri_indices.Add(last - 14);
+        tri_indices.Add(0);
 
-        //tri_indices.Add(last - 8);
-        //tri_indices.Add(2);
-        //tri_indices.Add(0);
+        tri_indices.Add(last - 14);
+        tri_indices.Add(2);
+        tri_indices.Add(0);
 
 
-        ////// 2
-        //tri_indices.Add(last - 8);
-        //tri_indices.Add(last - 6);
-        //tri_indices.Add(2);
+        //// 2
+        tri_indices.Add(last - 14);
+        tri_indices.Add(last - 12);
+        tri_indices.Add(2);
 
-        //tri_indices.Add(last - 6);
-        //tri_indices.Add(4);
-        //tri_indices.Add(2);
+        tri_indices.Add(last - 12);
+        tri_indices.Add(4);
+        tri_indices.Add(2);
 
-        //// 3
-        //tri_indices.Add(last - 6);
-        //tri_indices.Add(last - 4);
-        //tri_indices.Add(4);
+        // 3
+        tri_indices.Add(last - 12);
+        tri_indices.Add(last - 10);
+        tri_indices.Add(4);
 
-        //tri_indices.Add(last - 4);
-        //tri_indices.Add(6);
-        //tri_indices.Add(4);
+        tri_indices.Add(last - 10);
+        tri_indices.Add(6);
+        tri_indices.Add(4);
 
-        ////// 4 --------------------
-        //tri_indices.Add(last - 4);
-        //tri_indices.Add(last - 2);
-        //tri_indices.Add(6);
+        // 4 --------------------
+        tri_indices.Add(last - 10);
+        tri_indices.Add(last - 8);
+        tri_indices.Add(6);
 
-        //tri_indices.Add(last - 2);
-        //tri_indices.Add(8);    // ODD
-        //tri_indices.Add(6);
+        tri_indices.Add(last - 8);
+        tri_indices.Add(8);    // ODD
+        tri_indices.Add(6);
 
-        //// 5 --------------------
-        //tri_indices.Add(last - 2);
-        //tri_indices.Add(last);
-        //tri_indices.Add(8);    // ODD
+        // 5 --------------------
+        tri_indices.Add(last - 8);
+        tri_indices.Add(last - 6);
+        tri_indices.Add(8);    // ODD
 
-        //tri_indices.Add(last);
-        //tri_indices.Add(10);
-        //tri_indices.Add(8);    // ODD
+        tri_indices.Add(last - 6);
+        tri_indices.Add(10);
+        tri_indices.Add(8);    // ODD
 
-        //// 6 --------------------
-        //tri_indices.Add(last);
-        //tri_indices.Add(last + 2);
-        //tri_indices.Add(10);    // ODD
+        // 6 --------------------
+        tri_indices.Add(last - 6);
+        tri_indices.Add(last - 4);
+        tri_indices.Add(10);    // ODD
 
-        //tri_indices.Add(last + 2);
-        //tri_indices.Add(12);
-        //tri_indices.Add(10);    // ODD
+        tri_indices.Add(last - 4);
+        tri_indices.Add(12);
+        tri_indices.Add(10);    // ODD
 
-        ////7--------------------
-        //tri_indices.Add(last + 2);
-        //tri_indices.Add(last + 4);
-        //tri_indices.Add(12);
+        //7--------------------
+        tri_indices.Add(last - 4);
+        tri_indices.Add(last - 2);
+        tri_indices.Add(12);
 
-        //tri_indices.Add(last + 4);
-        //tri_indices.Add(14);    // ODD
-        //tri_indices.Add(12);
+        tri_indices.Add(last - 2);
+        tri_indices.Add(14);    // ODD
+        tri_indices.Add(12);
 
-        //// 8 --------------------
-        //tri_indices.Add(last + 4);
-        //tri_indices.Add(last - 10);
-        //tri_indices.Add(14);
+        // 8 --------------------
+        tri_indices.Add(last - 2);
+        tri_indices.Add(last - 16);
+        tri_indices.Add(14);
 
-        //tri_indices.Add(last - 10);
-        //tri_indices.Add(0);
-        //tri_indices.Add(14);    // ODD
+        tri_indices.Add(last - 16);
+        tri_indices.Add(0);
+        tri_indices.Add(14);    // ODD
         #endregion
 
         #region UVs
