@@ -609,7 +609,7 @@ public class BezierPath : MonoBehaviour
     {
         if (points.Count == 0 || points.Count == 1) { Debug.Log("Too few BezierPoints."); return; }
 
-        float normalizedDistancePercent = 0.5f;
+        //float normalizedDistancePercent = 0.5f;
         float baseDistance = 20f;
 
         // Loop through all points, pointing the point to the next point
