@@ -601,8 +601,36 @@ public class BezierPath : MonoBehaviour
 
         return new PosAndRot(tPos, tDir);
     }
+    #endregion
+
+    #region Help Functions
+    [ContextMenu("Straighten Points")]
+    private void StraightenPoints()
+    {
+        if (points.Count == 0 || points.Count == 1) { Debug.Log("Too few BezierPoints."); return; }
+
+        float normalizedDistancePercent = 0.1f;
+
+        // Loop through all points, pointing the point to the next point
+        for (int i = 0; i < points.Count; i++)
+        {
+            Vector3 prevPointPos = points[((i - 1) % points.Count)].transform.position;
+            Vector3 nextPointPos = points[(i + 1) % points.Count].transform.position;
+
+            Vector3 dirFromPrevPoint = transform.position - prevPointPos;
+            Vector3 dirToNextPoint = nextPointPos - transform.position;
+
+            // Interpolate direction
+            Vector3 interpolatedDir = Vector3.Lerp(dirFromPrevPoint, dirToNextPoint, 0.5f);
+
+            //Vector3.Lerp
+
+            points[i].control0.position = interpolatedDir;
+        }
+
+    }
+    #endregion
 }
-#endregion
 
 static class Helpers
 {

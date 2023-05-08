@@ -12,10 +12,24 @@ public class BezierPoint : MonoBehaviour
     [HideInInspector]
     public Vector3 anchor;
 
+    public bool forceLineLikeness = true;
+
 
     #endregion
 
-    #region Setup
+    #region Functions
+
+    private void StraightenLines()
+    {
+        // Direction from control to anchor
+        Vector3 dir = transform.position - control0.position;
+
+        // Final position for second control point
+        Vector3 c2Pos = transform.position + dir;
+
+        // Place second control point at pos
+        control1.transform.position = c2Pos;
+    }
 
     #endregion
 
@@ -29,6 +43,9 @@ public class BezierPoint : MonoBehaviour
         // Draw Lines for ControlPoints
         DrawLine(c0, anchor, Color.green);
         DrawLine(c1, anchor, Color.red);
+
+        // Straighten lines if necessary
+        if (forceLineLikeness) { StraightenLines(); }
 
         Handles.DrawBezier(c0, c1, anchor, anchor, Color.blue, Texture2D.whiteTexture, 1f);
     }
