@@ -609,23 +609,28 @@ public class BezierPath : MonoBehaviour
     {
         if (points.Count == 0 || points.Count == 1) { Debug.Log("Too few BezierPoints."); return; }
 
-        float normalizedDistancePercent = 0.1f;
+        float normalizedDistancePercent = 0.5f;
+        float baseDistance = 20f;
 
         // Loop through all points, pointing the point to the next point
         for (int i = 0; i < points.Count; i++)
         {
-            Vector3 prevPointPos = points[((i - 1) % points.Count)].transform.position;
+            Vector3 pointSelfPos = points[i].transform.position;
+
+
+            //Vector3 prevPointPos = points[((i - 1) % points.Count)].transform.position;
+            Vector3 prevPointPos = points[((i == 0) ? (points.Count - 1) : i - 1)].transform.position;
             Vector3 nextPointPos = points[(i + 1) % points.Count].transform.position;
 
-            Vector3 dirFromPrevPoint = transform.position - prevPointPos;
-            Vector3 dirToNextPoint = nextPointPos - transform.position;
+            Vector3 dirFromPrevPoint = prevPointPos - points[i].transform.position;
+            Vector3 dirToNextPoint = points[i].transform.position - nextPointPos;
 
             // Interpolate direction
             Vector3 interpolatedDir = Vector3.Lerp(dirFromPrevPoint, dirToNextPoint, 0.5f);
 
-            //Vector3.Lerp
 
-            points[i].control0.position = interpolatedDir;
+            //points[i].control0.position = (dirFromPrevPoint.normalized * baseDistance) + pointSelfPos;
+            points[i].control0.position = (interpolatedDir.normalized * baseDistance) + pointSelfPos;
         }
 
     }
