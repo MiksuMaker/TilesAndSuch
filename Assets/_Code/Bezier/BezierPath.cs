@@ -60,6 +60,9 @@ public class BezierPath : MonoBehaviour
     [ContextMenu("Get All Points")]
     private void GetAllPoints()
     {
+        // First clear Points list
+        points.Clear();
+
         for (int i = 0; i < transform.childCount; i++)
         {
             // Add all children to the list
@@ -67,13 +70,13 @@ public class BezierPath : MonoBehaviour
         }
     }
 
-    //[ContextMenu("Delete Most Points")]
+    [ContextMenu("Delete Most Points")]
     private void DeleteAllPoints()
     {
         for (int i = transform.childCount; i > 0; i--)
         {
             // If only child, save them
-            if (i == 0) { break; }
+            if (i == 1) { break; }
 
             // Destroy rest of the Children
             GameObject child = transform.GetChild(i - 1).gameObject;
