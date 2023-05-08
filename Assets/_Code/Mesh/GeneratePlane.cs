@@ -19,6 +19,7 @@ public class GeneratePlane : MonoBehaviour
     public float maxHeight = 10f;
     public float minHeight = -10f;
     public bool useGeneralConstraints = true;
+    public float heightModifier = -50f;
 
     [Header("Perlin Noise")]
     public float noiseStrength = 10f;
@@ -91,6 +92,8 @@ public class GeneratePlane : MonoBehaviour
         List<Vector3> verts = new List<Vector3>();
         // Triangle indices
         List<int> tris = new List<int>();
+        // UVs
+        List<Vector2> uvs = new List<Vector2>();
 
         // Change between segments
         float delta = size / (float)segments;
@@ -112,9 +115,15 @@ public class GeneratePlane : MonoBehaviour
 
                 // Generate height
                 //height = Mathf.PerlinNoise(x / damper, y / damper) * noiseStrength; // V1
-                height = GeneratePerlinNoise(x, y);
+                height = GeneratePerlinNoise(x, y) + heightModifier;
 
                 verts.Add(new Vector3(xPos, height, yPos));
+                //Debug.DrawRay(new Vector3(xPos, height, yPos), Vector3.up * x, Color.red, 20f);
+                //Debug.DrawRay(new Vector3(xPos, height, yPos), Vector3.up * y, Color.yellow, 20f);
+
+                // Add UVs
+                uvs.Add(new Vector2(x % 2, y % 2));
+                //uvs.Add(new Vector2((x/10) % 2, y % 2));
             }
         }
 
@@ -146,6 +155,8 @@ public class GeneratePlane : MonoBehaviour
         mesh.SetVertices(verts);
         mesh.SetTriangles(tris, 0);
         mesh.RecalculateNormals();
+        //Debug.Log("Verts: " + verts.Count + "|| UVs: " + uvs.Count);
+        mesh.SetUVs(0, uvs);
     }
 
     private float GeneratePerlinNoise(float x, float y)
