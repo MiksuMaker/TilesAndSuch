@@ -495,51 +495,6 @@ public class BezierPath : MonoBehaviour
             uvs.Add(new Vector2(0.8f, o)); // End?
             uvs.Add(new Vector2(0.8f, o)); // End?
 
-            #region Old
-            //uvs.Add(new Vector2(0.2f, 0));  // Begin
-            //uvs.Add(new Vector2(0.1f, 0));
-            //uvs.Add(new Vector2(0f, 0));    // Left corner top
-            //uvs.Add(new Vector2(0f, 0));
-            //uvs.Add(new Vector2(0f, 0));    // Right corner bottom
-            //uvs.Add(new Vector2(1f, 0));    // Right corner top
-            //uvs.Add(new Vector2(0.9f, 0));
-            //uvs.Add(new Vector2(0.8f, 0)); // End?
-
-
-            //uvs.Add(new Vector2(0.2f, 1));  // Begin
-            //uvs.Add(new Vector2(0.1f, 1));
-            //uvs.Add(new Vector2(0f, 1));    // Left corner top
-            //uvs.Add(new Vector2(0f, 1));
-            //uvs.Add(new Vector2(0f, 1));    // Right corner bottom
-            //uvs.Add(new Vector2(1f, 1));    // Right corner top
-            //uvs.Add(new Vector2(0.9f, 1));
-            //uvs.Add(new Vector2(0.8f, 1)); // End?
-
-            //uvs.Add(new Vector2(0.2f, 0));  // Begin
-            //uvs.Add(new Vector2(0.2f, 1));  // Begin
-
-            //uvs.Add(new Vector2(0.1f, 0));
-            //uvs.Add(new Vector2(0.1f, 1));
-
-            //uvs.Add(new Vector2(0f, 0));    // Left corner top
-            //uvs.Add(new Vector2(0f, 1));    // Left corner top
-
-            //uvs.Add(new Vector2(0f, 0));
-            //uvs.Add(new Vector2(0f, 1));
-
-            //uvs.Add(new Vector2(0f, 0));    // Right corner bottom
-            //uvs.Add(new Vector2(0f, 1));    // Right corner bottom
-
-            //uvs.Add(new Vector2(1f, 0));    // Right corner top
-            //uvs.Add(new Vector2(1f, 1));    // Right corner top
-
-            //uvs.Add(new Vector2(0.9f, 0));
-            //uvs.Add(new Vector2(0.9f, 1));
-
-            //uvs.Add(new Vector2(0.8f, 0)); // End?
-            //uvs.Add(new Vector2(0.8f, 1)); // End?
-            #endregion
-
         }
         #endregion
 
@@ -563,37 +518,20 @@ public class BezierPath : MonoBehaviour
         thisTravel += (1 / (float)pointsBetween);
 
 
-
-
         float increment = 1f / points.Count;
         int currentPoint = Mathf.FloorToInt(travel / increment);
 
 
-        //Debug.Log("Travel/Increment ratio: " + travel / increment);
-        //Debug.Log("Travel: " + travel + ", currentPoint: " + currentPoint);
-
-
         float travelOnPoint = (travel / increment) % 1f;
-        //Debug.Log("Travel On point: " + travelOnPoint);
-
-
-        //Debug.Log("Calculation: " + (travel * points.Count) + ", Point: " + currentPoint);
 
 
         // POSITION
-        //Vector3 tPos = GetBezierPosition(travel, points[i % points.Count], points[(i + 1) % points.Count]);
-        //Vector3 tPos = GetBezierPosition(thisTravel, points[0], points[1]);
-
-        //if (travelOnPoint > 0.985f) { travelOnPoint = 0f; }
-
         Vector3 tPos = GetBezierPosition(travelOnPoint, points[currentPoint % points.Count], points[(currentPoint + 1) % points.Count]);
 
 
         // ROTATIOOOON
         Vector3 tDir = GetBezierDirection(travelOnPoint, points[currentPoint % points.Count], points[(currentPoint + 1) % points.Count]);
-        //Vector3 tDir = GetBezierDirection(thisTravel, points[0], points[1]);
-        //Quaternion rot = Quaternion.LookRotation(tDir);
-
+        
         // Draw a box on pos
         //Gizmos.color = Color.red;
         //Gizmos.DrawCube(tPos, Vector3.one * 4f);
