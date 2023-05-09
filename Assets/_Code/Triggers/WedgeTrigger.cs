@@ -24,7 +24,7 @@ public class WedgeTrigger : Trigger
             float dotProduct = Vector3.Dot(transform.forward, dirToTarget.normalized);
             float angleToTarget = Mathf.Acos(dotProduct) * Mathf.Rad2Deg;
 
-            Debug.Log("Angle to target: " + angleToTarget);
+            //Debug.Log("Angle to target: " + angleToTarget);
 
             if (angleToTarget < viewAngle)
             {
