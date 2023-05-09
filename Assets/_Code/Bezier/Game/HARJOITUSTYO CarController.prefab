@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2910236368668509152}
   m_Layer: 0
-  m_Name: HARJOITUSTYO JUTTU
+  m_Name: HARJOITUSTYO CarController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

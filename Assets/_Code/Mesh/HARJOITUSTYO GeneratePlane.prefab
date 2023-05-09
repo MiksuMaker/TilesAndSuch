@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5642610098924693538}
   m_Layer: 0
-  m_Name: HARJOITUSTYO JUTTU
+  m_Name: HARJOITUSTYO GeneratePlane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
