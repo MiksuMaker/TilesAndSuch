@@ -17,7 +17,6 @@ public class RadialTrigger : Trigger
         {
             // Target in sight
             DoTargetInSightEffect();
-            DoTargetInSightEffect();
         }
         else
         {

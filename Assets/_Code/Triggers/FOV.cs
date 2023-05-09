@@ -60,7 +60,10 @@ public class FOV : MonoBehaviour
 
     public Vector3 DirFromAngle(float angleInDegrees)
     {
-        return new Vector3(Mathf.Sin(angleInDegrees * Mathf.Deg2Rad), 0, Mathf.Cos(angleInDegrees * Mathf.Deg2Rad));
+        Vector3 rot = new Vector3(Mathf.Sin(angleInDegrees * Mathf.Deg2Rad), 0, Mathf.Cos(angleInDegrees * Mathf.Deg2Rad));
+
+        // Rotate towards
+        return rot;
     }
 
     #endregion
